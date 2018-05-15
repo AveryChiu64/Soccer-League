@@ -544,17 +544,72 @@ public class SoccerLeague {// start of class SoccerLeague
 	}//End of storedResultsForGraph method.
 
 　
-　
-　
-　
-	int [][] sortResults(int [][] organizedResults) {//Beginning of the sortResults method.
-		
+/**
+	 * sortResults-This method sorts the organizedResults based off of the points
 
-　
-	}//End of the sortResults method.
+	 * -----------------------------List of Local Variables------------------------
+	 * tempRow[]-Stores a temporary row that is used to swap rows (type int[])
+	 * temp-Stores a temporary value(a point) that is used to swap points in the points column. (type int)
+	 * count-A variable used to count how many times a loop runs to store 
+	 * 		to check through each value in a column/row (type int)
+	 * counter- A variable used to compare the "count" row/column with the previous row/column. (type int)
+	 * 
+	 * 
+	 * @param organizedResults(type int[][]) is a 2D array that stores the
+	 * accumulated results
+	 * @throws None
+	 * @return organizedResults(type int[][]) - These results are sorted.
+	 */
 
-　
-　
-　
-　
+	int[][] sortResults(int[][] organizedResults) {// Beginning of the sortResults method.
+
+		// Variables
+		int tempRow[];
+		int temp, count, counter;
+
+		// Insertion sort to sort the 2D array organizedResults
+		for (count = 1; count < 8; count++) {// Beginning of loop
+			// that checks through each row of points
+
+			temp = organizedResults[count][7];
+			// Sets the "count": row of the points column into a
+			// temporary variable
+			tempRow = organizedResults[count];
+			// Sets the "count" row into a temporary array
+			counter = count - 1;
+			// Sets counter equal to 1 less than count
+			while ((counter >= 0) && (organizedResults[counter][7] < temp)) {
+				// While loop that makes sure counter is greater than 0 and that
+				// a row of the point column(7) is less than the next row of the point
+				// column that is beside it (temp).
+				organizedResults[counter + 1] = organizedResults[counter];
+				// Swaps the rows if the point column below is greater than the
+				// column above
+				counter--;
+				// Subtracts one from counter, this allows the program to
+				// continue to shift the rows along the already sorted
+				// rows until it is in the right position.
+			}
+
+			organizedResults[counter + 1] = tempRow;
+			// Sets the row that is 1 above "counter"
+			// equal to the temporary row.
+
+		}
+
+		// Test REMOVE THIS AFTER
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (j == 0)
+					System.out.print((char) organizedResults[i][j] + "\t");
+				else
+					System.out.print(organizedResults[i][j] + "\t");
+			}
+			System.out.println();
+		} // THIS IS A TEST REMOVE THIS AFTER
+
+		return organizedResults;
+
+	}// End of the sortResults method.
+
 }// end of class SoccerLeague
