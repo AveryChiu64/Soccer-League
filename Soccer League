@@ -597,19 +597,46 @@ public class SoccerLeague {// start of class SoccerLeague
 
 		}
 
-		// Test REMOVE THIS AFTER
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (j == 0)
-					System.out.print((char) organizedResults[i][j] + "\t");
-				else
-					System.out.print(organizedResults[i][j] + "\t");
-			}
-			System.out.println();
-		} // THIS IS A TEST REMOVE THIS AFTER
-
 		return organizedResults;
 
 	}// End of the sortResults method.
+/**
+	 * displayResults- This method displays the accumulated/sorted results in a chart.
+	 * -----------------------------List of Local Variables------------------------
+	 * row-Counts the rows printed out (type int)
+	 * column-Counts the columns printed out(type int)
+	 * 
+	 * @param organizedResults(type int[][]) is a 2D array that stores the
+	 * accumulated/sorted results.
+	 * @throws None
+	 * @return void
+	 */
 
-}// end of class SoccerLeague
+	void displayResults(int [][] organizedResults) {//Beginning of displayResults method.
+
+		//Variables
+		int row,column;
+
+		//Displays the menu which shows the results
+		System.out.println("=============================================================");
+		System.out.println("Team\tGames\t\t\t\tGoals\tGoals\tPoints");
+		System.out.println("Name\tPlayed \tWins\tTies\tLosses\tFor\tAgainst  " );
+		System.out.println("=============================================================");
+
+		//These loops print out all the results of organizedResults
+		for (row = 0; row < 8; row++) {//Beginning of outer for loop.
+			for (column = 0; column < 8; column++) {//Beginning of inner for loop.
+				if (column == 0)//Checks if it is the first column
+					//If so it will display the team name as a character instead
+					//of the ASCII value 
+					System.out.print((char) organizedResults[row][column] + "\t");
+				else//Displays the sorted results 
+					System.out.print(organizedResults[row][column] + "\t");
+
+			}//End of inner for loop.
+			System.out.println();//Adds a line for the next row.
+		}//End of outer for loop.
+	}//End of displayResults method.
+
+}// end of class SoccerLeague.
+
