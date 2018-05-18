@@ -29,10 +29,10 @@
  * @throws IO Exception
  * @return void
  */
-import java.io.*;//imports the io library
+import java.io.*;//Imports the io library.
 
-public class SoccerLeague {// start of class SoccerLeague
-	public static void main(String[] args) throws IOException {// main method
+public class SoccerLeague {// Start of class SoccerLeague.
+	public static void main(String[] args) throws IOException {// Beginning of main method
 
 		// Variables
 		int[][] results=new int[48][4];
@@ -40,15 +40,15 @@ public class SoccerLeague {// start of class SoccerLeague
 		int [][] organizedResults=new int[8][8];
 
 		/*The organizedResults 2D integer array is formated to match the chart.
-		 * Column 0 stores the team names (in order from A to H)
+		 * Column 1 stores the team names (in order from A to H)
 		 * Each row represents a team name (from A to H)
-		 * Column 1 stores the number of games played.
-		 * Column 2 stores the number of wins each team has.
-		 * Column 3 stores the number of ties each team has.
-		 * Column 4 stores the number of losses each team has.
-		 * Column 5 stores the number of goals for each team has.
-		 * Column 6 stores the number of goals against each team has.
-		 * Column 7 stores the number of points each team gets
+		 * Column 2 stores the number of games played.
+		 * Column 3 stores the number of wins each team has.
+		 * Column 4 stores the number of ties each team has.
+		 * Column 5 stores the number of losses each team has.
+		 * Column 6 stores the number of goals for each team has.
+		 * Column 7 stores the number of goals against each team has.
+		 * Column 8 stores the number of points each team gets
 		 * Note: A team gets two points for a win, one point for a tie, 
 		 * and no points for a loss.
 		 */
@@ -73,10 +73,11 @@ public class SoccerLeague {// start of class SoccerLeague
 		//and store results.
 		organizedResults=sl.storedResultsForGraph(results);
 		//Calls upon the storedResultsForGraph method to accumulate all the results from the user input
+		organizedResults=sl.sortResults(organizedResults);
+		//Calls upon the sortResults method to sort all the accumulated results 
+		sl.displayResults(organizedResults);
+		//Calls upon the displayResults method to display the results
 
-　
-　
-　
 	}// end of main method
 	/**
 	 * nameOfTheFile Method: This functional method gets the name the file
@@ -114,12 +115,13 @@ public class SoccerLeague {// start of class SoccerLeague
 		System.out.println("eg. h://data.txt");
 		System.out.println("=============================================================");
 
-　
+
 		while(true) {//Beginning of while loop.
 			try{//Beginning of the try and catch. 
 				fileName=in.readLine();//Accepts a file name. 
 				BufferedReader br = new BufferedReader (new FileReader(fileName));
 				//Reads the file that the user entered.
+				br.close();//closes the file 
 				break;//Breaks out of the loop if there is proper input.
 			} //End of try.
 			catch(Exception e) {//Catches any exceptions if the file
@@ -130,10 +132,11 @@ public class SoccerLeague {// start of class SoccerLeague
 				System.out.println("Please enter a proper directory of the file.");
 			}//End of catch.
 		}//End of while loop.
+
 		return fileName;
 	}//End of method nameOfTheFile.
 
-　
+
 	/**
 	 * inputResults Method: This functional methods finds the results of a match
 	 * from user input. 
@@ -182,7 +185,7 @@ public class SoccerLeague {// start of class SoccerLeague
 				if (input==null||count==48) //Checks if the file ends or if 48 games have been played.
 					break;//Breaks out of the loop to return to the main method.
 
-　
+
 				firstCharacter= input.charAt(0);// Gets the first value of the String input.
 
 				winningTeam = sl.winningTeamCheck(firstCharacter);//Calls upon the winningTeamCheck method.
@@ -203,7 +206,7 @@ public class SoccerLeague {// start of class SoccerLeague
 				losingTeamScoreLine=input.substring(positionOfLosingTeam+1);
 				losingTeamScore=Integer.parseInt(losingTeamScoreLine);
 
-　
+
 				if (winningTeam != 'z'&& losingTeam!='z'&&winningTeam!=losingTeam
 						&&winningTeamScore >= losingTeamScore) {
 					// Checks if the user has entered a proper input.
@@ -255,11 +258,11 @@ public class SoccerLeague {// start of class SoccerLeague
 		return results;// returns the user input to the main method
 	}// end of inputResults method
 
-　
-　
-　
-　
-　
+
+
+
+
+
 	/**
 	 * winningTeamCheck Method: This functional method checks if the user has
 	 * entered a proper winning team name
@@ -305,7 +308,7 @@ public class SoccerLeague {// start of class SoccerLeague
 		//Returns winningTeam to the inputResults method
 	}//End of winningTeamCheck method
 
-　
+
 	/**
 	 * losingTeamCheck Method: This functional method checks if the user has
 	 * entered a proper losing team name.
@@ -398,10 +401,10 @@ public class SoccerLeague {// start of class SoccerLeague
 			System.out.println("=============================================================");
 		}
 
-　
+
 	}//End of singleResult method (DELETE THIS AFTER)
 
-　
+
 	/**
 	 * storedResultsForGraph method: This method accumulates the results from
 	 * the user input.
@@ -424,127 +427,125 @@ public class SoccerLeague {// start of class SoccerLeague
 	 * @return organizedResults(type int[][]) 
 	 */
 
-　
-　
+
+
 	int [][] storedResultsForGraph (int [][] results) {//Beginning of storedResultsForGraph method.
 
 		//Variables
 		int teams,resultRow=0,count=0;
 		int [][] organizedResults=new int[8][8];
 		/*The organizedResults 2D integer array is formated to match the chart.
-		 * Column 0 stores the team names (in order from A to H)
-		 * Note:These will be sorted later, this 2D array just organizes the user input
+		 * Column 1 stores the team names (in order from A to H)
 		 * Each row represents a team name (from A to H)
-		 * Column 1 stores the number of games played.
-		 * Column 2 stores the number of wins each team has.
-		 * Column 3 stores the number of ties each team has.
-		 * Column 4 stores the number of losses each team has.
-		 * Column 5 stores the number of goals for each team has.
-		 * Column 6 stores the number of goals against each team has.
-		 * Column 7 stores the number of points each team gets
+		 * Column 2 stores the number of games played.
+		 * Column 3 stores the number of wins each team has.
+		 * Column 4 stores the number of ties each team has.
+		 * Column 5 stores the number of losses each team has.
+		 * Column 6 stores the number of goals for each team has.
+		 * Column 7 stores the number of goals against each team has.
+		 * Column 8 stores the number of points each team gets
 		 * Note: A team gets two points for a win, one point for a tie, 
 		 * and no points for a loss.
 		 */
 
-　
-　
-		//This loop sets all the rows to represent one of the teams
-		for(teams='A';teams<='H';teams++) {//Beginning of for loop
-			organizedResults[count][0]=teams;
-			//Sets the team name to one of the rows
+
+
+		// This loop sets all the rows to represent one of the teams
+		for (teams = 'A'; teams <= 'H'; teams++) {// Beginning of for loop
+			organizedResults[count][0] = teams;
+			// Sets the team name to one of the rows
 			count++;
-			//Adds one to count to move down one row
-		}//end of for loop
+			// Adds one to count to move down one row
+		} // end of for loop
 
-　
-		//This loop goes through each result that was entered and stores information.
-		for(resultRow=0;resultRow<48;resultRow++) {//Beginning of for loop.
-			count=0;//This resets the count to 0 to make sure it isn't carried over from
-			//a previous loop.
+		// This loop goes through each result that was entered and stores information.
+		for (resultRow = 0; resultRow < 48; resultRow++) {// Beginning of for loop.
+			count = 0;// This resets the count to 0 to make sure it isn't carried over from
+			// a previous loop.
 
-			if(results[resultRow][0]==0)//Checks if there is still input
-				break;//If there is no more input, the computer will break
-			//out of the loop.
+			if (results[resultRow][0] == 0)// Checks if there is still input
+				break;// If there is no more input, the computer will break
+			// out of the loop.
 
-			if(results[resultRow][1]==results[resultRow][3]) {//Checks for a tie.
-				for(teams='A';teams<='H';teams++) {//Inner loop to check through each team
-					//to see which ones are mentioned from the results.
-					if(results[resultRow][0]==teams) {//Checks to see which team tied.
+			if (results[resultRow][1] == results[resultRow][3]) {// Checks for a tie.
+				for (teams = 'A'; teams <= 'H'; teams++) {// Inner loop to check through each team
+					// to see which ones are mentioned from the results.
+					if (results[resultRow][0] == teams) {// Checks to see which team tied.
 						organizedResults[count][1]++;
-						//Counts the number of games a team has played.
+						// Counts the number of games a team has played.
 						organizedResults[count][3]++;
-						//Counts the number of ties a team has.
-						organizedResults[count][5]+=results[resultRow][1];
-						//Adds up the number of goals a team scored.
-						organizedResults[count][6]+=results[resultRow][3];
-						//Adds up the number of goals that were scored against the team.
+						// Counts the number of ties a team has.
+						organizedResults[count][5] += results[resultRow][1];
+						// Adds up the number of goals a team scored.
+						organizedResults[count][6] += results[resultRow][3];
+						// Adds up the number of goals that were scored against the team.
 						organizedResults[count][7]++;
-						//Gives the team one point for a tie.
+						// Gives the team one point for a tie.
 
-					}//End of if statement to check which teams tied
-					//and to record results.
+					} // End of if statement to check which teams tied
+					// and to record results.
 
-					if(results[resultRow][2]==teams) {//Checks to see the other team that tied.
+					if (results[resultRow][2] == teams) {// Checks to see the other team that tied.
 						organizedResults[count][1]++;
-						//Counts the number of games a team has played.
+						// Counts the number of games a team has played.
 						organizedResults[count][3]++;
-						//Counts the number of ties a team has.
-						organizedResults[count][5]+=results[resultRow][3];
-						//Adds up the number of goals a team scored.
-						organizedResults[count][6]+=results[resultRow][1];
-						//Adds up the number of goals that were scored against the team.
+						// Counts the number of ties a team has.
+						organizedResults[count][5] += results[resultRow][3];
+						// Adds up the number of goals a team scored.
+						organizedResults[count][6] += results[resultRow][1];
+						// Adds up the number of goals that were scored against the team.
 						organizedResults[count][7]++;
-						//Gives the team one point for a tie.
+						// Gives the team one point for a tie.
 
-					}//End of if statement to check which other team tied
-					//and to record results.
+					} // End of if statement to check which other team tied
+					// and to record results.
 
-					count++;//Adds up the number of times the loop goes 
-					//so that the result can be stored in the 
-					//proper row.
-				}//End of inner for loop.
-			}else {//Beginning of else statement to record scores
-				//for the games that are not tied
-				for(teams='A';teams<='H';teams++) {//Inner loop to check through each team
-					//to see which ones are mentioned from the results.
-					if(results[resultRow][0]==teams) {//Checks which team has won.
+					count++;// Adds up the number of times the loop goes
+					// so that the result can be stored in the proper row.
+
+				} // End of inner for loop.
+			} else {// Beginning of else statement to record scores
+				// for the games that are not tied
+				for (teams = 'A'; teams <= 'H'; teams++) {// Inner loop to check through each team
+					// to see which ones are mentioned from the results.
+					if (results[resultRow][0] == teams) {// Checks which team has won.
 						organizedResults[count][1]++;
-						//Counts the number of games a team has played.
+						// Counts the number of games a team has played.
 						organizedResults[count][2]++;
-						//Counts the number of wins a team has.
-						organizedResults[count][5]+=results[resultRow][1];
-						//Adds up the number of goals a team scored.
-						organizedResults[count][6]+=results[resultRow][3];
-						//Adds up the number of goals that were scored against the team.
-						organizedResults[count][7]+=2;
-						//Gives the team two points for a win.
+						// Counts the number of wins a team has.
+						organizedResults[count][5] += results[resultRow][1];
+						// Adds up the number of goals a team scored.
+						organizedResults[count][6] += results[resultRow][3];
+						// Adds up the number of goals that were scored against the team.
+						organizedResults[count][7] += 2;
+						// Gives the team two points for a win.
 
-					}//End of if statement to record results for a winning team
+					} // End of if statement to record results for a winning team
 
-					if(results[resultRow][2]==teams) {//Checks which team has lost.
+					if (results[resultRow][2] == teams) {// Checks which team has lost.
 						organizedResults[count][1]++;
-						//Counts the number of games a team has played.
+						// Counts the number of games a team has played.
 						organizedResults[count][4]++;
-						//Counts the number of losses a team has.
-						organizedResults[count][5]+=results[resultRow][3];
-						//Adds up the number of goals a team scored.
-						organizedResults[count][6]+=results[resultRow][1];
-						//Adds up the number of goals that were scored against the team.
+						// Counts the number of losses a team has.
+						organizedResults[count][5] += results[resultRow][3];
+						// Adds up the number of goals a team scored.
+						organizedResults[count][6] += results[resultRow][1];
+						// Adds up the number of goals that were scored against the team.
 
-					}//End of if statement to record results for the losing team
-					count++;//Adds up the number of times the loop goes 
-					//so that the result can be stored in the 
-					//proper row.
+					} // End of if statement to record results for the losing team
+					count++;// Adds up the number of times the loop goes
+					// so that the result can be stored in the
+					// proper row.
 
-				}//end of inner for loop to check through each team.
-			}//End of else statement to record scores for the games that are not tied.
-		}//end of for loop that goes through each result and stores information.
+				} // end of inner for loop to check through each team.
+			} // End of else statement to record scores for the games that are not tied.
+		} // end of for loop that goes through each result and stores information.
 
 		return organizedResults;
 	}//End of storedResultsForGraph method.
 
-　
-/**
+
+	/**
 	 * sortResults-This method sorts the organizedResults based off of the points
 
 	 * -----------------------------List of Local Variables------------------------
@@ -553,7 +554,12 @@ public class SoccerLeague {// start of class SoccerLeague
 	 * count-A variable used to count how many times a loop runs to store 
 	 * 		to check through each value in a column/row (type int)
 	 * counter- A variable used to compare the "count" row/column with the previous row/column. (type int)
-	 * 
+	 * row- A variable used to check through each row to see which ones have the same
+	 * 		number of wins, so that their goal difference can be checked (type int).
+	 * goalDifferenceOne - A variable used to see the goal difference (goals for minus goals against)
+	 * 		of a team (type int).
+	 * goalDifferenceTwo -A variable used to see the goal difference (goals for minus goals against)
+	 * 		of another team(type int).
 	 * 
 	 * @param organizedResults(type int[][]) is a 2D array that stores the
 	 * accumulated results
@@ -565,7 +571,7 @@ public class SoccerLeague {// start of class SoccerLeague
 
 		// Variables
 		int tempRow[];
-		int temp, count, counter;
+		int temp, count, counter, goalDifferenceOne, goalDifferenceTwo;
 
 		// Insertion sort to sort the 2D array organizedResults
 		for (count = 1; count < 8; count++) {// Beginning of loop
@@ -579,7 +585,7 @@ public class SoccerLeague {// start of class SoccerLeague
 			counter = count - 1;
 			// Sets counter equal to 1 less than count
 			while ((counter >= 0) && (organizedResults[counter][7] < temp)) {
-				// While loop that makes sure counter is greater than 0 and that
+				// Beginning of while loop that makes sure counter is greater than 0 and that
 				// a row of the point column(7) is less than the next row of the point
 				// column that is beside it (temp).
 				organizedResults[counter + 1] = organizedResults[counter];
@@ -589,18 +595,55 @@ public class SoccerLeague {// start of class SoccerLeague
 				// Subtracts one from counter, this allows the program to
 				// continue to shift the rows along the already sorted
 				// rows until it is in the right position.
-			}
+			} // End of while loop
 
 			organizedResults[counter + 1] = tempRow;
 			// Sets the row that is 1 above "counter"
-			// equal to the temporary row.
+			// equal to row that was overridden during the
+			// swapping process.
 
-		}
+		} // End of loop
+		// that checks through each row of points
+
+		for (count = 0; count < 7; count++) {// Beginning of for loop
+			// to check through each row of sorted points.
+			if (organizedResults[count][7] == organizedResults[count + 1][7]) {
+				// This if statement checks if there are ties within the sorted points column.
+				goalDifferenceOne = organizedResults[count][5] - organizedResults[count][6];
+				// This sets goalDifferenceOne to the goal difference of a team (goals for minus
+				// goals against)
+				goalDifferenceTwo = organizedResults[count + 1][5] - organizedResults[count + 1][6];
+				// This sets goalDifferenceTwo to the goal difference of another team (goals for
+				// minus goals against)
+				if (goalDifferenceOne < goalDifferenceTwo) {// This if statement
+					// checks if the first goal difference is less than the second goal difference.
+
+					// These commands swap two rows.
+					// Example
+					// 1 1 1
+					// 2 2 2
+					// Becomes
+					// 2 2 2
+					// 1 1 1
+					tempRow = organizedResults[count];
+					// Temporarily stores one of the rows into tempRow.
+					organizedResults[count] = organizedResults[count + 1];
+					// Sets the row equal to the row below it
+					organizedResults[count + 1] = tempRow;
+					// Sets the row below equal to the temporary row which
+					// was originally the row above it.
+
+				} // End of the inner if statement to check the goal differences
+			} // End of outer if statement to check if there are ties within the sorted points
+			// column.
+		} // End of the for loop to check through each row of sorted points.
 
 		return organizedResults;
 
 	}// End of the sortResults method.
-/**
+
+
+	/**
 	 * displayResults- This method displays the accumulated/sorted results in a chart.
 	 * -----------------------------List of Local Variables------------------------
 	 * row-Counts the rows printed out (type int)
@@ -617,26 +660,37 @@ public class SoccerLeague {// start of class SoccerLeague
 		//Variables
 		int row,column;
 
-		//Displays the menu which shows the results
+		/*The organizedResults 2D integer array is formated to match the chart.
+		 * Column 1 stores the team names
+		 * Each row represents a team name (from A to H)
+		 * Column 2 stores the number of games played.
+		 * Column 3 stores the number of wins each team has.
+		 * Column 4 stores the number of ties each team has.
+		 * Column 5 stores the number of losses each team has.
+		 * Column 6 stores the number of goals for each team has.
+		 * Column 7 stores the number of goals against each team has.
+		 * Column 8 stores the number of points each team gets.
+		 */
+
+		// Displays the menu which shows the results
 		System.out.println("=============================================================");
 		System.out.println("Team\tGames\t\t\t\tGoals\tGoals\tPoints");
-		System.out.println("Name\tPlayed \tWins\tTies\tLosses\tFor\tAgainst  " );
+		System.out.println("Name\tPlayed \tWins\tTies\tLosses\tFor\tAgainst  ");
 		System.out.println("=============================================================");
 
-		//These loops print out all the results of organizedResults
-		for (row = 0; row < 8; row++) {//Beginning of outer for loop.
-			for (column = 0; column < 8; column++) {//Beginning of inner for loop.
-				if (column == 0)//Checks if it is the first column
-					//If so it will display the team name as a character instead
-					//of the ASCII value 
+		// These loops print out all the results of organizedResults
+		for (row = 0; row < 8; row++) {// Beginning of outer for loop.
+			for (column = 0; column < 8; column++) {// Beginning of inner for loop.
+				if (column == 0)// Checks if it is the first column
+					// If so it will display the team name as a character instead
+					// of the ASCII value
 					System.out.print((char) organizedResults[row][column] + "\t");
-				else//Displays the sorted results 
+				else// Displays the sorted results
 					System.out.print(organizedResults[row][column] + "\t");
 
-			}//End of inner for loop.
-			System.out.println();//Adds a line for the next row.
-		}//End of outer for loop.
-	}//End of displayResults method.
+			} // End of inner for loop.
+			System.out.println();// Adds a line for the next row.
+		} // End of outer for loop.
+	}// End of displayResults method.
 
 }// end of class SoccerLeague.
-
