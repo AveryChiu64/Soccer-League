@@ -57,6 +57,7 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		SoccerLeague sl = new SoccerLeague();
 
 		//Details for the user
+		System.out.println("		SOCCER LEAGUE SCORING PROGRAM");
 		System.out.println("=============================================================");
 		System.out.println("This program keeps track of team standings in a soccer league.");
 		System.out.println("The teams are A,B,C,D,E,F,G and H.");
@@ -67,17 +68,19 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		System.out.println("but no points for a loss.");
 		System.out.println("=============================================================");
 
-		//Method Calls 
-		fileName=sl.nameOfTheFile();//Calls upon the nameOfTheFile method to accept a file name.
-		results = sl.inputResults(fileName);//Calls upon the inputResults method to read the file
-		//and store results.
-		organizedResults=sl.storedResultsForGraph(results);
-		//Calls upon the storedResultsForGraph method to accumulate all the results from the user input
-		organizedResults=sl.sortResults(organizedResults);
-		//Calls upon the sortResults method to sort all the accumulated results 
+		// Method Calls
+		fileName = sl.nameOfTheFile();// Calls upon the nameOfTheFile method to accept a file name.
+		results = sl.inputResults(fileName);// Calls upon the inputResults method to read the file
+		// and store results.
+		organizedResults = sl.storedResultsForGraph(results);
+		// Calls upon the storedResultsForGraph method to accumulate all the results
+		// from the user input
+		organizedResults = sl.sortResults(organizedResults);
+		// Calls upon the sortResults method to sort all the accumulated results
 		sl.displayResults(organizedResults);
-		//Calls upon the displayResults method to display the results
-
+		// Calls upon the displayResults method to display the results
+		sl.outputResultsToAFile(organizedResults);
+		// Calls upon the outputResultsToAFile method to write the results to a file
 	}// end of main method
 	/**
 	 * nameOfTheFile Method: This functional method gets the name the file
@@ -153,7 +156,7 @@ public class SoccerLeague {// Start of class SoccerLeague.
 	 * losingTeam - the name of losing team(type char)
 	 * firstCharacter - the first character of the user input (type char)
 	 * results -a 2D array that stores the information of the results of the matches  (type int[][])
-	 * br – object used to get user input from a file (type BufferedReader)
+	 * br – object used to read input from a file (type BufferedReader)
 	 * sl - object used to access methods in the SoccerLeague class(type SoccerLeague)
 	 * count- counts the number of games that have been played 
 	 * @param fileName - the name of the file to be opened(type String)
@@ -549,29 +552,27 @@ public class SoccerLeague {// Start of class SoccerLeague.
 	 * sortResults-This method sorts the organizedResults based off of the points
 
 	 * -----------------------------List of Local Variables------------------------
-	 * tempRow[]-Stores a temporary row that is used to swap rows (type int[])
-	 * temp-Stores a temporary value(a point) that is used to swap points in the points column. (type int)
-	 * count-A variable used to count how many times a loop runs to store 
-	 * 		to check through each value in a column/row (type int)
-	 * counter- A variable used to compare the "count" row/column with the previous row/column. (type int)
-	 * row- A variable used to check through each row to see which ones have the same
-	 * 		number of wins, so that their goal difference can be checked (type int).
-	 * goalDifferenceOne - A variable used to see the goal difference (goals for minus goals against)
-	 * 		of a team (type int).
-	 * goalDifferenceTwo -A variable used to see the goal difference (goals for minus goals against)
-	 * 		of another team(type int).
+	 * tempRow[]-Stores a temporary row that is used to swap rows (type int[]).
+	 * temp-Stores a temporary value(a point) that is used to swap rows based off of its value (type int).
+	 * count-A variable used to count how many times a loop runs to check through
+	 * 		 each value in a column/row (type int).
+	 * counter- A variable used to compare the "count" row/column with the previous row/column (type int).
+	 * goalDifferenceAbove - A variable used to see the goal difference (goals for minus goals against)
+	 * 		of a the team above the temporary team(type int).
+	 * goalDifferenceOfTempRow -A variable used to see the goal difference (goals for minus goals against)
+	 * 		of the temporary team (same row was temp and tempRow)(type int).
 	 * 
 	 * @param organizedResults(type int[][]) is a 2D array that stores the
-	 * accumulated results
+	 * accumulated results.
 	 * @throws None
-	 * @return organizedResults(type int[][]) - These results are sorted.
+	 * @return organizedResults(type int[][]) - These results are fully sorted and ready to be displayed.
 	 */
 
 	int[][] sortResults(int[][] organizedResults) {// Beginning of the sortResults method.
 
 		// Variables
 		int tempRow[];
-		int temp, count, counter, goalDifferenceOne, goalDifferenceTwo;
+		int temp, count, counter, goalDifferenceAbove = 0, goalDifferenceOfTempRow = -1;
 
 		// Insertion sort to sort the 2D array organizedResults
 		for (count = 1; count < 8; count++) {// Beginning of loop
@@ -584,6 +585,11 @@ public class SoccerLeague {// Start of class SoccerLeague.
 			// Sets the "count" row into a temporary array
 			counter = count - 1;
 			// Sets counter equal to 1 less than count
+			goalDifferenceOfTempRow = organizedResults[count][5] - organizedResults[count][6];
+			// This sets goalDifferenceOfTempRow to the goal difference of another team
+			// (goals for
+			// minus goals against)
+
 			while ((counter >= 0) && (organizedResults[counter][7] < temp)) {
 				// Beginning of while loop that makes sure counter is greater than 0 and that
 				// a row of the point column(7) is less than the next row of the point
@@ -591,51 +597,51 @@ public class SoccerLeague {// Start of class SoccerLeague.
 				organizedResults[counter + 1] = organizedResults[counter];
 				// Swaps the rows if the point column below is greater than the
 				// column above
+
 				counter--;
 				// Subtracts one from counter, this allows the program to
 				// continue to shift the rows along the already sorted
 				// rows until it is in the right position.
-			} // End of while loop
+
+			} // End of while loop that checks the points columns.
+
+			if ((counter >= 0) && (organizedResults[counter][7] == temp)) {
+				// If statement that checks for ties for points
+				goalDifferenceAbove = organizedResults[counter][5] - organizedResults[counter][6];
+				// This sets goalDifferenceAbove to the goal difference of a team (goals for
+				// minus
+				// goals against)
+			} // End of if statement that checks for ties for points
+
+			while ((counter >= 0) && (organizedResults[counter][7] == temp)
+					&& goalDifferenceAbove < goalDifferenceOfTempRow) {
+				// This if statement checks if there are ties within the sorted points column.
+
+				organizedResults[counter + 1] = organizedResults[counter];
+				// Swaps the rows if the goalDifference of the temporary team is greater than
+				// the
+				// row above.
+
+				counter--;
+				// Subtracts one from counter, this allows the program to
+				// continue to shift the rows along the already sorted
+				// rows until it is in the right position.
+
+				if (counter >= 0) {
+					// If statement makes sure that counter is greater than 0
+					// so the program does not crash.
+					goalDifferenceAbove = organizedResults[counter][5] - organizedResults[counter][6];
+					// This sets goalDifferenceAbove to the goal difference of a team (goals for
+					// minus goals against)
+
+				} // End of if statement that makes sure counter is greater than 0.
+			} // End of while loop that checks for ties.
 
 			organizedResults[counter + 1] = tempRow;
 			// Sets the row that is 1 above "counter"
 			// equal to row that was overridden during the
 			// swapping process.
 
-		} // End of loop
-		// that checks through each row of points
-
-		for (count = 0; count < 7; count++) {// Beginning of for loop
-			// to check through each row of sorted points.
-			if (organizedResults[count][7] == organizedResults[count + 1][7]) {
-				// This if statement checks if there are ties within the sorted points column.
-				goalDifferenceOne = organizedResults[count][5] - organizedResults[count][6];
-				// This sets goalDifferenceOne to the goal difference of a team (goals for minus
-				// goals against)
-				goalDifferenceTwo = organizedResults[count + 1][5] - organizedResults[count + 1][6];
-				// This sets goalDifferenceTwo to the goal difference of another team (goals for
-				// minus goals against)
-				if (goalDifferenceOne < goalDifferenceTwo) {// This if statement
-					// checks if the first goal difference is less than the second goal difference.
-
-					// These commands swap two rows.
-					// Example
-					// 1 1 1
-					// 2 2 2
-					// Becomes
-					// 2 2 2
-					// 1 1 1
-					tempRow = organizedResults[count];
-					// Temporarily stores one of the rows into tempRow.
-					organizedResults[count] = organizedResults[count + 1];
-					// Sets the row equal to the row below it
-					organizedResults[count + 1] = tempRow;
-					// Sets the row below equal to the temporary row which
-					// was originally the row above it.
-
-				} // End of the inner if statement to check the goal differences
-			} // End of outer if statement to check if there are ties within the sorted points
-			// column.
 		} // End of the for loop to check through each row of sorted points.
 
 		return organizedResults;
@@ -648,7 +654,7 @@ public class SoccerLeague {// Start of class SoccerLeague.
 	 * -----------------------------List of Local Variables------------------------
 	 * row-Counts the rows printed out (type int)
 	 * column-Counts the columns printed out(type int)
-	 * 
+	 * object used to get user input (type BufferedReader)
 	 * @param organizedResults(type int[][]) is a 2D array that stores the
 	 * accumulated/sorted results.
 	 * @throws None
@@ -693,4 +699,88 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		} // End of outer for loop.
 	}// End of displayResults method.
 
-}// end of class SoccerLeague.
+	/**
+	 * outputResultsToAFile- This method writes the accumulated/sorted results to a file
+	 * that the user chooses.
+	 * -----------------------------List of Local Variables------------------------
+	 * br- object used to get user input (type BufferedReader)
+	 * bw- object used to write to a file (type BufferedWriter)
+	 * fileName-The name of the file that the data will be written to (type String).
+	 * row-Counts the rows printed out (type int).
+	 * column-Counts the columns printed out(type int).
+	 * 
+	 * @param organizedResults(type int[][]) is a 2D array that stores the
+	 * accumulated/sorted results.
+	 * @throws IOException
+	 * @return void
+	 */
+
+	void outputResultsToAFile(int[][] organizedResults) throws IOException {// Beginning of the outputResults method
+
+		// System Objects
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		// Variables
+		String fileName = "h://temp.txt";
+		int row, column;
+
+		// Prompts the user to enter a file directory to store the results
+		System.out.println("=============================================================");
+		System.out.println("Please enter the directory where you would like");
+		System.out.println("to store these results.");
+		System.out.println("If you do not wish to store the results please type 'stop'.");
+		System.out.println("=============================================================");
+
+		while (true) {// Beginning of while loop to get a file name.
+			try {// Beginning of the try and catch to check.
+				// if the user enters a proper directory.
+				fileName = br.readLine();// Accepts a file name and directory.
+				if (fileName.equalsIgnoreCase("stop"))// Checks if the user has entered 'stop'.
+					break;// If so the computer will break out the loop.
+
+				// System object that allows us to write to a file.
+				BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+
+				//Writes out the menu for the graph of data.
+				bw.write("=============================================================");
+				bw.newLine();
+				bw.write("Team\tGames\t\t\t\tGoals\tGoals\tPoints");
+				bw.newLine();
+				bw.write("Name\tPlayed \tWins\tTies\tLosses\tFor\tAgainst  ");
+				bw.newLine();
+				bw.write("=============================================================");
+				bw.newLine();
+
+				// These loops writes out all the results of organizedResults
+				for (row = 0; row < 8; row++) {// Beginning of outer for loop.
+					for (column = 0; column < 8; column++) {// Beginning of inner for loop.
+						if (column == 0)// Checks if it is the first column
+							// If so it will write the team name as a character instead
+							// of the ASCII value.
+							bw.write((char) organizedResults[row][column] + "\t");
+						else// Writes the sorted results.
+							bw.write(organizedResults[row][column] + "\t");
+
+					} // End of inner for loop.
+					bw.newLine();// Adds a line for the next row.
+				} // End of outer for loop.
+				System.out.println("The results have been written in " +fileName);
+				bw.close();// Closes the file.
+				break;// Breaks out of the loop if there is proper input.
+			} // End of try.
+			catch (IOException ex) {// Catches any exceptions if the file
+				// cannot be written to.
+
+				// Prompts the user to enter a proper file name.
+				System.out.println("Error writing to file '" + fileName + "'");
+				System.out.println("Please enter a proper directory of the file.");
+			} // End of catch.
+
+		} // End of while loop.
+
+		// Thanks the user.
+		System.out.println("Thank you for using the Soccer League Scoring program");
+		System.out.println("Please come back soon!");
+	}// End of outputResultsToAFile method.
+
+}// End of class SoccerLeague.
