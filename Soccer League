@@ -63,6 +63,8 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		System.out.println("The teams are A,B,C,D,E,F,G and H.");
 		System.out.println("When all the results have been submitted a table will be created.");
 		System.out.println("to show each team's standings.");
+		System.out.println("They will be ordered from highest to lowest based off of the numbers of points.");
+		System.out.println("If teams have the same points, they will be ordered based off of their goal difference.");
 		System.out.println("There is a maximum of 48 games.");
 		System.out.println("A team gets two points for a win, one point for a tie,");
 		System.out.println("but no points for a loss.");
@@ -226,8 +228,6 @@ public class SoccerLeague {// Start of class SoccerLeague.
 					results[count][3]=losingTeamScore;//Stores the losing team score into
 					//the fourth column of the "count" row.
 
-					sl.singleResult(results,count);//THIS IS FOR TESTING REMOVE THIS AFTER
-
 					count++;//Adds one to count to indicate that there is another line of results.
 				}//End of if statement.
 				else {// If the user does not enter proper input he will be prompted to
@@ -377,35 +377,6 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		return losingTeam;//Returns losingTeam to inputResults method.
 	}//end of losingTeamCheck method
 
-	/**
-	 * singleResult method: This method tells the user the result they have entered 
-	 * THIS IS FOR TESTING PURPOSES ONLY DELETE THIS AFTER 
-	 *DELETE THIS 
-	 * -----------------------------List of Local Variables------------------------
-	 * none
-	 * 
-	 * @param results(type String[]) is an array that stores the information 
-	 * of the results of a single match 
-	 * @throws None
-	 * @return None
-	 */
-
-	void singleResult(int [][] results,int count) {//Beginning of singleResult method
-		if(results[count][1]==(results[count][3])) {//checks for a tie 
-			//Tells the user which teams are tied
-			System.out.println("Both Team "+(char)results[count][0]+" and Team "+(char)results[count][2]+" are tied.");
-			System.out.println("They both have a score of "+results[count][1]);
-			System.out.println("=============================================================");
-			//Tells the user the score of both teams.
-
-		}else {
-			System.out.println("Team "+(char)results[count][0]+" is the winner with a score of "+results[count][1]);
-			System.out.println("Team "+(char)results[count][2]+" is the loser with a score of "+results[count][3]);
-			System.out.println("=============================================================");
-		}
-
-
-	}//End of singleResult method (DELETE THIS AFTER)
 
 
 	/**
@@ -574,7 +545,7 @@ public class SoccerLeague {// Start of class SoccerLeague.
 		int tempRow[];
 		int temp, count, counter, goalDifferenceAbove = 0, goalDifferenceOfTempRow = -1;
 
-		// Insertion sort to sort the 2D array organizedResults
+		// Modified insertion sort to sort the 2D array organizedResults
 		for (count = 1; count < 8; count++) {// Beginning of loop
 			// that checks through each row of points
 
