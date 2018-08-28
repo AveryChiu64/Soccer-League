@@ -1,0 +1,124 @@
+
+//==============================================================================
+// Program name - SerialismGenerator
+// Author - Avery Chiu
+// Date - 2018/04/15
+// Programming Language, version number - Java 9
+// ==============================================================================
+//Definition:The program creates 12 tone rows
+//Input: The user chooses whether they want a 12 tone row or not
+//Output: 12 tone rows
+//Process: The program will check the user input and then produce a 12 tone row by shuffling 
+//12 numbers in an array. The array will be outputed as musical notes for the user.
+//==============================================================================
+
+import java.io.*;
+
+public class SerialismGenerator {// Beginning of SerialismGenerator class
+	public static void main(String[] args) throws IOException {// Beginning of main method
+
+		// Variables
+		int[] notes = new int[12];
+		int choice;
+
+		// Introduction
+		System.out.println("---------------------MAIN MENU----------------------------");
+		System.out.println("Weclome to the Serialism Generator created by Avery Chiu");
+		System.out.println("This program generates 12 tone rows randomly for music");
+		System.out.println("---------------------------------------------------------");
+		// Method Calls
+		choice=input();
+		while(choice==1) {
+		notes = shuffle(notes);
+		output(notes);
+		choice=input();
+		}
+		System.out.println("Thank you for using the 12 tone row generator");
+
+	}// End of main method
+
+	static int input() throws IOException {// Beginning of input method
+		int choice;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		// User prompts
+		System.out.println("---------------------------------------------------------");
+		System.out.println("Type 1 if you would like to the computer to make a 12 tone row");
+		System.out.println("Type 2 if you would like to exit the program");
+		System.out.println("---------------------------------------------------------");
+		while (true) {// Loop to check for proper input
+			try {
+				choice = Integer.parseInt(br.readLine());
+				if (choice == 1 || choice == 2)
+					break;
+				else
+					System.out.println("You must choose either 1 or 2");
+			} catch (NumberFormatException e) {// Catches improper input
+				System.out.println("Please enter a proper option");
+
+			} // End of catch
+		} // End of loop to check for proper input
+		return choice;
+	}// End of input method
+
+	static int[] shuffle(int[] notes) {// Beginning of shuffle method
+		int noOfNotes = 12, temp = 0;
+		for (int i = 0; i < noOfNotes; i++)// Initializes each number in the array to a note
+			notes[i] = i + 1;
+
+		for (int i = 0; i < noOfNotes; i++) {// Beginning of loop to shuffle
+			int s = i + (int) (Math.random() * (noOfNotes - i));
+			temp = notes[s];
+			notes[s] = notes[i];
+			notes[i] = temp;
+		} // End of loop to shuffle
+		return notes;
+
+	}// End of shuffle method
+
+	static void output(int[] notes) {// Beginning of output method
+		for (int i = 0; i < notes.length; i++) {// Beginning of loop to check each element
+			switch (notes[i]) {// Beginning of switch case to convert each number to a musical note
+			case 1:
+				System.out.print("C ");
+				break;
+			case 2:
+				System.out.print("C#/Db ");
+				break;
+			case 3:
+				System.out.print("D ");
+				break;
+			case 4:
+				System.out.print("D#/Eb ");
+				break;
+			case 5:
+				System.out.print("E ");
+				break;
+			case 6:
+				System.out.print("F ");
+				break;
+			case 7:
+				System.out.print("F#/Gb ");
+				break;
+			case 8:
+				System.out.print("G ");
+				break;
+			case 9:
+				System.out.print("G#/Ab ");
+				break;
+			case 10:
+				System.out.print("A ");
+				break;
+			case 11:
+				System.out.print("A#/Bb ");
+				break;
+			case 12:
+				System.out.print("B ");
+				break;
+			}// End of switch case to convert each number to a musical note
+
+		} // End of loop to check each element
+		System.out.println();
+	}// End of output method
+
+}// End of SerialismGenerator class
