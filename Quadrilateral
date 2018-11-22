@@ -1,0 +1,271 @@
+/*=================================================================
+Program name - Quadrilaterals
+Author - Avery Chiu 
+Date - 2018/11/19
+Programming Language, version number - Java 9
+=================================================================
+ */
+
+//****************************************************************************************
+//<Class>
+
+//<List Of Identifiers
+//****************************************************************************************
+
+public abstract class Quadrilateral {
+	private static int numQ = 0;
+
+	Quadrilateral() {
+		numQ++;
+	}
+
+	public static int getNumQ() {
+		return numQ;
+	}
+
+	public abstract double findArea();
+
+	public abstract double findPerimeter();
+
+}
+
+class Square extends Quadrilateral {
+	private double sideLength;
+
+	public Square() {
+		super();
+		sideLength = 0;
+	}
+
+	public double getSideLength() {
+		return sideLength;
+	}
+
+	public void setSideLength(double sideLength) {
+		this.sideLength = sideLength;
+	}
+
+	public double findArea() {
+		return sideLength * sideLength;
+	}
+
+	public double findPerimeter() {
+		return sideLength * 4;
+	}
+
+	public String toString() {
+		return "sideLength=" + sideLength;
+	}// end of class Square
+}
+
+class Rectangle extends Square {
+	private double width;
+
+	public Rectangle() {
+		super();
+		width = 0;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double findArea() {
+		return getSideLength() * width;
+	}
+
+	public double findPerimeter() {
+		return 2 * (getSideLength() + width);
+	}
+
+	public String toString() {
+		return "width=" + width;
+	}
+}// end of class Rectangle
+
+class Parallelogram extends Rectangle {
+	private double height;
+
+	public Parallelogram() {
+		super();
+		height = 0;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public double findArea() {
+		return (getWidth() * height) / 2;
+	}
+
+	public double findPerimeter() {
+		return 2 * (getSideLength() + getWidth());
+	}
+
+	public String toString() {
+		return "height=" + height;
+	}
+}// end of class Parallelogram
+
+class Trapezoid extends Parallelogram {
+	private double topBase;
+
+	public Trapezoid() {
+		super();
+		topBase = 0;
+	}
+
+	public void setTopBase(double topBase) {
+		this.topBase = topBase;
+	}
+
+	public double getOtherSide() {
+		return topBase;
+	}
+
+	public double findArea() {
+		return ((topBase + getWidth()) * getHeight()) / 2;
+	}
+
+	public double findPerimeter() {// This works for isoceles
+		return 2 * getSideLength() + getWidth() + topBase;
+	}
+
+	public String toString() {
+		return "topBase=" + topBase;
+	}
+}// end of class Trapezoid
+
+class Rhombus extends Square {
+	private double diagonal1;
+	private double diagonal2;
+
+	public Rhombus() {
+		super();
+		diagonal1 = 0;
+		diagonal2 = 0;
+	}
+
+	public void setDiagonal1(double diagonal1) {
+		this.diagonal1 = diagonal1;
+	}
+
+	public double getDiagonal1() {
+		return diagonal1;
+	}
+
+	public void setDiagonal2(double diagonal2) {
+		this.diagonal2 = diagonal2;
+	}
+
+	public double getDiagonal2() {
+		return diagonal2;
+	}
+
+	public double findArea() {
+		return (diagonal1 * diagonal2) / 2;
+	}
+
+	public double findPerimeter() {
+		return getSideLength() * 4;
+	}
+
+	public String toString() {
+		return "diagonal1=" + diagonal1 + " diagonal2=" + diagonal2;
+	}
+}// End of class Rhombus
+
+class Kite extends Rhombus {
+	private double otherSide;
+
+	public Kite() {
+		super();
+		otherSide = 0;
+	}
+
+	public void setOtherSide(double otherSide) {
+		this.otherSide = otherSide;
+	}
+
+	public double getOtherSide() {
+		return otherSide;
+	}
+
+	public double findArea() {
+		return (getDiagonal1() * getDiagonal2()) / 2;
+	}
+
+	public double findPerimeter() {
+		return 2 * (otherSide + getSideLength());
+	}
+
+	public String toString() {
+		return "otherSide=" + otherSide + "area=" + findArea() + "perimeter=" + findPerimeter();
+	}
+
+}// End of class Rhombus
+
+
+
+/*=================================================================
+Program name - Quadrilaterals
+Author - Avery Chiu 
+Date - 2018/11/19
+Programming Language, version number - Java 9
+=================================================================
+//Interface for the Quadrilateral class 
+ */
+import java.io.*;
+
+class Use {
+	public static void main(String[] args) throws IOException {
+		int choice1, choice2;
+		menu();
+		choice1 = input1();
+		choice2 = input2();
+
+	}
+
+	/**
+	 * menu method: This procedural method outputs the menu which provides details
+	 * for the user regarding the program.
+	 * 
+	 * @param None
+	 * @throws None
+	 * @return void
+	 */
+	static void menu() {
+		System.out.println("WELCOME TO THE QUADRILATERAL CREATOR");
+		System.out.println("This program creates and stores a list of 20 quadrilaterals");
+	}// End of menu method
+
+	static int input1() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Would you like to create a default or custom shape?");
+		System.out.println("/t1.Default");
+		System.out.println("/t2.Custom");
+		return Integer.parseInt(br.readLine());
+	}
+
+	static int input2() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Please enter an option");
+		System.out.println("/t1.Square");
+		System.out.println("/t2.Rectangle");
+		System.out.println("/t3.Parallelogram");
+		System.out.println("/t4.Trapezoid");
+		System.out.println("/t5.Rhombus");
+		System.out.println("/t6.Kite");
+		System.out.println("/t7.Custom");
+		return Integer.parseInt(br.readLine());
+	}
+}// End of Use class
