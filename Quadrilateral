@@ -216,6 +216,7 @@ class Kite extends Rhombus {
 
 
 
+
 /*=================================================================
 Program name - Quadrilaterals
 Author - Avery Chiu 
@@ -225,10 +226,11 @@ Programming Language, version number - Java 9
 //Interface for the Quadrilateral class 
  */
 import java.io.*;
+import java.util.ArrayList;
 
 class Use {
 	public static void main(String[] args) throws IOException {
-		int choice1, choice2;
+		int choice1, choice2, count = 0;
 		menu();
 		choice1 = input1();
 		choice2 = input2();
@@ -268,4 +270,29 @@ class Use {
 		System.out.println("/t7.Custom");
 		return Integer.parseInt(br.readLine());
 	}
+
+
+	static String creation(int choice1, int choice2, int count) {
+		String shapeNum="shape"+count;
+		if(choice1==1) {
+            switch (choice2)  {
+            case 1:
+                   Square ("shape"+count) =new Square();
+                    break;
+            case 2:
+                    
+                    break;
+            case 3:
+                    
+                    break;
+            case 4:
+                   
+                    break;
+            }
+
+		}
+		
+	}
+
 }// End of Use class
+
