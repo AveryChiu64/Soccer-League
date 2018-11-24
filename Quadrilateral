@@ -217,24 +217,28 @@ class Kite extends Rhombus {
 
 
 
+
 /*=================================================================
 Program name - Quadrilaterals
 Author - Avery Chiu 
 Date - 2018/11/19
 Programming Language, version number - Java 9
 =================================================================
-//Interface for the Quadrilateral class 
  */
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
-class Use {
+public class Use {
 	public static void main(String[] args) throws IOException {
-		int choice1, choice2, count = 0;
-		menu();
-		choice1 = input1();
-		choice2 = input2();
+		ArrayList<Object> list = new ArrayList<Object>();
+		int count = 0;
 
+		menu();
+		while (count <= 20 && check()) {
+			count++;
+			creation(input1(), input2(), count, list);
+		}
+		
 	}
 
 	/**
@@ -246,53 +250,141 @@ class Use {
 	 * @return void
 	 */
 	static void menu() {
-		System.out.println("WELCOME TO THE QUADRILATERAL CREATOR");
+		System.out.println("                WELCOME TO THE QUADRILATERAL CREATOR");
 		System.out.println("This program creates and stores a list of 20 quadrilaterals");
 	}// End of menu method
 
-	static int input1() throws IOException {
+	static boolean check() throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Would you like to create a (or keep making more) shape(s)?");
+		System.out.println("Type a number to respond");
+		System.out.println("\t1.Yes");
+		System.out.println("\t2.No");
+		return Integer.parseInt(br.readLine()) == 1;
+	}
+
+	static boolean input1() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Would you like to create a default or custom shape?");
-		System.out.println("/t1.Default");
-		System.out.println("/t2.Custom");
-		return Integer.parseInt(br.readLine());
+		System.out.println("\t1.Default");
+		System.out.println("\t2.Custom");
+		return Integer.parseInt(br.readLine()) == 1;
 	}
 
 	static int input2() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Please enter an option");
-		System.out.println("/t1.Square");
-		System.out.println("/t2.Rectangle");
-		System.out.println("/t3.Parallelogram");
-		System.out.println("/t4.Trapezoid");
-		System.out.println("/t5.Rhombus");
-		System.out.println("/t6.Kite");
-		System.out.println("/t7.Custom");
+		System.out.println("\t1.Square");
+		System.out.println("\t2.Rectangle");
+		System.out.println("\t3.Parallelogram");
+		System.out.println("\t4.Trapezoid");
+		System.out.println("\t5.Rhombus");
+		System.out.println("\t6.Kite");
 		return Integer.parseInt(br.readLine());
+
 	}
 
+	static void creation(boolean choice1, int choice2, int count, ArrayList<Object> list) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		if (choice1) {
+			switch (choice2) {
+			case 1:
+				Square sq = new Square();
+				list.add(sq);
+				break;
+			case 2:
+				Rectangle rec = new Rectangle();
+				list.add(rec);
+				break;
+			case 3:
+				Parallelogram par = new Parallelogram();
+				list.add(par);
+				break;
+			case 4:
+				Trapezoid trap = new Trapezoid();
+				list.add(trap);
+				break;
+			case 5:
+				Rhombus rhom = new Rhombus();
+				list.add(rhom);
+				break;
+			case 6:
+				Kite kit = new Kite();
+				list.add(kit);
+				break;
+			default:
+				System.out.println("Please re-enter a proper option");
+				count--;
+			}
+		} // End of default shape
+		else {
+			switch (choice2) {
+			case 1:
+				Square sq = new Square();
+				System.out.println("Please enter a side length");
+				sq.setSideLength(Double.parseDouble(br.readLine()));
+				list.add(sq);
+				break;
+			case 2:
+				Rectangle rec = new Rectangle();
+				System.out.println("Please enter a side length");
+				rec.setSideLength(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a width");
+				rec.setWidth(Double.parseDouble(br.readLine()));
+				list.add(rec);
+				break;
+			case 3:
+				Parallelogram par = new Parallelogram();
+				System.out.println("Please enter a side length");
+				par.setSideLength(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a width");
+				par.setWidth(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a height");
+				par.setHeight(Double.parseDouble(br.readLine()));
+				list.add(par);
+				break;
+			case 4:
+				Trapezoid trap = new Trapezoid();
+				System.out.println("Please enter a side length");
+				trap.setSideLength(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a width (bottom base)");
+				trap.setWidth(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a height");
+				trap.setHeight(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a the top base");
+				trap.setTopBase(Double.parseDouble(br.readLine()));
+				list.add(trap);
+				break;
+			case 5:
+				Rhombus rhom = new Rhombus();
+				System.out.println("Please enter a side length");
+				rhom.setSideLength(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a diagonal length 1");
+				rhom.setDiagonal1(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a diagonal length 2");
+				rhom.setDiagonal2(Double.parseDouble(br.readLine()));
+				list.add(rhom);
+				break;
+			case 6:
+				Kite kit = new Kite();
+				System.out.println("Please enter the side length of the first adjacent sides");
+				kit.setSideLength(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter the length of the other adjacent side");
+				kit.setOtherSide(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a diagonal length 1");
+				kit.setDiagonal1(Double.parseDouble(br.readLine()));
+				System.out.println("Please enter a diagonal length 2");
+				kit.setDiagonal2(Double.parseDouble(br.readLine()));
+				list.add(kit);
+				break;
+			default:
+				System.out.println("Please re-enter a proper option");
+				count--;
+			}
+		} // End of custom shape
 
-	static String creation(int choice1, int choice2, int count) {
-		String shapeNum="shape"+count;
-		if(choice1==1) {
-            switch (choice2)  {
-            case 1:
-                   Square ("shape"+count) =new Square();
-                    break;
-            case 2:
-                    
-                    break;
-            case 3:
-                    
-                    break;
-            case 4:
-                   
-                    break;
-            }
-
-		}
-		
 	}
 
 }// End of Use class
+
 
