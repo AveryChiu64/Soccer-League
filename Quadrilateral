@@ -1,4 +1,5 @@
 
+
 /*=================================================================
 Program name - Quadrilaterals
 Author - Avery Chiu 
@@ -11,9 +12,11 @@ import java.util.*;
 
 public class Use {
 	public static void main(String[] args) throws IOException {
+		//System objects
 		ArrayList<Object> list = new ArrayList<Object>();
 		int count = 0;
-
+		
+		//Method Calls
 		menu();
 		while (count <= 20 && check()) {
 			count++;
@@ -42,7 +45,10 @@ public class Use {
 
 	static boolean check() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("=============================================================");
 		System.out.println("Would you like to create a (or keep making more) shape(s)?");
+		System.out.println("Once you choose to stop creating shapes");
+		System.out.println("You will be able to search through your database for shapes");
 		System.out.println("Type a number to respond");
 		System.out.println("\t1.Yes");
 		System.out.println("\t2.No");
@@ -52,6 +58,7 @@ public class Use {
 
 	static boolean input1() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("=============================================================");
 		System.out.println("Would you like to create a default or custom shape?");
 		System.out.println("Default shapes will automatically have units of 1 for each property");
 		System.out.println("Custom shapes allow you to choose the properties (eg side length, height etc)");
@@ -63,6 +70,7 @@ public class Use {
 
 	static int input2() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("=============================================================");
 		System.out.println("Please enter an option");
 		System.out.println("\t1.Square");
 		System.out.println("\t2.Rectangle");
@@ -183,6 +191,7 @@ public class Use {
 		System.out.println("You have succesfully created your quadrilaterals");
 
 		while (choice != 4) {
+			System.out.println("=============================================================");
 			System.out.println("Please choose an option");
 			System.out.println("\t1.Show a list of all the quadrilaterals created");
 			System.out.println("\t2.Find a specific quadrilateral based off of its key (number assigned)");
@@ -194,8 +203,8 @@ public class Use {
 				outputList(list);
 			else if (choice == 2)
 				outputQuad(list);
-			else
-				outputList(list);
+			else if(choice==3)
+				numberOfQuads(list);
 
 		}
 	}
@@ -203,11 +212,16 @@ public class Use {
 	static void outputList(ArrayList<Object> list) {
 		// System objects
 		Iterator<Object> it = list.iterator();
+		
+		//Variables
+		int count=1;
 
 		System.out.println("		QUADRILATERALS");
 		System.out.println("=============================================================");
 		while (it.hasNext()) {
+			System.out.println("Quadrilateral " +count);
 			System.out.println(it.next());
+			count++;
 		} // End of while loop
 		System.out.println("=============================================================");
 	}// End of outputList method
@@ -219,13 +233,16 @@ public class Use {
 		System.out.println("Please enter the key of the object you want to find");
 		System.out.println("Eg the key for quadrilateral 1 would be 1");
 		System.out.println("=============================================================");
-		System.out.println(list.get(Integer.parseInt(br.readLine()) - 1));
+		System.out.println(list.get(Integer.parseInt(br.readLine())-1));
 		System.out.println("=============================================================");
 	}//End of outputQuad method
 	
-	static void numberOfQuads(ArrayList<Object> list) {//UNFINISHED
+	static void numberOfQuads(ArrayList<Object> list) {
 		//System objects
-		System.out.println("There are a total of" + getNumQ() +" quadrilaterals");
+		System.out.println("=============================================================");
+		System.out.println("There are a total of " + Quadrilateral.getNumQ() +" quadrilaterals");
+		
+		
 	}//End of numberOfQuads method
 }// End of Use class
 
