@@ -276,12 +276,8 @@ public abstract class Quadrilateral {
 
 	public abstract double findPerimeter();
 	
-	@Override 
-	public String toString() {
-		return "Quadrilateral=" +numQ;
-	}
 
-}
+}//End of Quadrilateral class
 
 class Square extends Quadrilateral {
 	private double sideLength;
@@ -311,7 +307,7 @@ class Square extends Quadrilateral {
 	public String toString() {
 		return "Square sideLength=" + sideLength;
 	}
-}//End of class square
+}//End of Square class
 
 class Rectangle extends Square {
 	private double width;
@@ -341,7 +337,7 @@ class Rectangle extends Square {
 	public String toString() {
 		return "Rectangle sidelength=" + getSideLength() + ", width=" + width;
 	}
-}// end of class Rectangle
+}// End of Rectangle class
 
 class Parallelogram extends Rectangle {
 	private double height;
@@ -371,7 +367,7 @@ class Parallelogram extends Rectangle {
 	public String toString() {
 		return "Parallelogram sidelength= " + getSideLength() + ", width=" + getWidth() + ",  height=" + height;
 	}
-}// end of class Parallelogram
+}// End of  Parallelogram class 
 
 class Trapezoid extends Parallelogram {
 	private double topBase;
@@ -402,7 +398,7 @@ class Trapezoid extends Parallelogram {
 		return "Trapezoid sidelength=" + getSideLength() + " ,width=" + getWidth() + " ,height=" + getHeight()
 				+ " ,topBase=" + topBase;
 	}
-}// end of class Trapezoid
+}// end of Trapezoid class 
 
 class Rhombus extends Square {
 	private double diagonal1;
@@ -442,7 +438,7 @@ class Rhombus extends Square {
 	public String toString() {
 		return "Rhombus sideLength=" + getSideLength() + " ,diagonal1=" + diagonal1 + " ,diagonal2=" + diagonal2;
 	}
-}// End of class Rhombus
+}// End of Rhombus class 
 
 class Kite extends Rhombus {
 	private double otherSide;
@@ -474,4 +470,4 @@ class Kite extends Rhombus {
 				+ " ,otherAdjacentSide=" + otherSide;
 	}
 
-}// End of class Kite
+}// End of Kite class 
