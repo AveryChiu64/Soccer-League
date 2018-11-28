@@ -14,13 +14,13 @@ public class Use {
 	public static void main(String[] args) throws IOException {
 		//System objects
 		ArrayList<Object> list = new ArrayList<Object>();
-		int count = 0;
+	
 		
 		//Method Calls
 		menu();
-		while (count <= 20 && check()) {
-			count++;
-			creation(input1(), input2(), count, list);
+		while (Quadrilateral.getNumQ() <= 20 && check()) {
+		
+			creation(input1(), input2(), list);
 		}
 		menuForData(list);
 
@@ -83,7 +83,7 @@ public class Use {
 
 	}// End of input2 method
 
-	static void creation(boolean choice1, int choice2, int count, ArrayList<Object> list) throws IOException {
+	static void creation(boolean choice1, int choice2, ArrayList<Object> list) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		if (choice1) {
 			switch (choice2) {
@@ -113,7 +113,6 @@ public class Use {
 				break;
 			default:
 				System.out.println("Please re-enter a proper option");
-				count--;
 			}// End of switch case
 		} // End of default shape
 		else {
@@ -178,11 +177,10 @@ public class Use {
 				break;
 			default:
 				System.out.println("Please re-enter a proper option");
-				count--;
 			}// End of switch case
 		} // End of custom shape
 
-		System.out.println("The shape you just created will be stored as quadrilateral " + count);
+		System.out.println("The shape you just created will be stored as quadrilateral " + Quadrilateral.getNumQ());
 	}// End of creation method
 
 	static void menuForData(ArrayList<Object> list) throws IOException {
@@ -246,6 +244,8 @@ public class Use {
 	}//End of numberOfQuads method
 }// End of Use class
 
+
+
 /*=================================================================
 Program name - Quadrilaterals
 Author - Avery Chiu 
@@ -255,7 +255,7 @@ Programming Language, version number - Java 9
  */
 
 //****************************************************************************************
-//<Class>
+//<Class> 
 
 //<List Of Identifiers
 
@@ -275,16 +275,19 @@ public abstract class Quadrilateral {
 	public abstract double findArea();
 
 	public abstract double findPerimeter();
-	
 
-}//End of Quadrilateral class
+}// End of Quadrilateral class
 
 class Square extends Quadrilateral {
 	private double sideLength;
+	private int numSquareCount;
 
 	public Square() {
 		super();
 		sideLength = 1;
+		if (getClass() == Square.class)
+			numSquareCount++;
+
 	}
 
 	public double getSideLength() {
@@ -302,12 +305,13 @@ class Square extends Quadrilateral {
 	public double findPerimeter() {
 		return sideLength * 4;
 	}
-	
-	@Override 
+
+	@Override
 	public String toString() {
-		return "Square sideLength=" + sideLength;
+		return "Square sideLength=" + sideLength + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea()
+				+ " units^2";
 	}
-}//End of Square class
+}// End of Square class
 
 class Rectangle extends Square {
 	private double width;
@@ -332,10 +336,11 @@ class Rectangle extends Square {
 	public double findPerimeter() {
 		return 2 * (getSideLength() + width);
 	}
-	
-	@Override 
+
+	@Override
 	public String toString() {
-		return "Rectangle sidelength=" + getSideLength() + ", width=" + width;
+		return "Rectangle sidelength=" + getSideLength() + " units, width=" + width + " units, Perimeter="
+				+ findPerimeter() + " units Area=" + findArea() + " units^2";
 	}
 }// End of Rectangle class
 
@@ -363,11 +368,12 @@ class Parallelogram extends Rectangle {
 		return 2 * (getSideLength() + getWidth());
 	}
 
-	@Override 
+	@Override
 	public String toString() {
-		return "Parallelogram sidelength= " + getSideLength() + ", width=" + getWidth() + ",  height=" + height;
+		return "Parallelogram sidelength= " + getSideLength() + " units, width=" + getWidth() + " units,  height="
+				+ height + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea() + " units^2";
 	}
-}// End of  Parallelogram class 
+}// End of Parallelogram class
 
 class Trapezoid extends Parallelogram {
 	private double topBase;
@@ -393,12 +399,13 @@ class Trapezoid extends Parallelogram {
 		return 2 * getSideLength() + getWidth() + topBase;
 	}
 
-	@Override 
+	@Override
 	public String toString() {
-		return "Trapezoid sidelength=" + getSideLength() + " ,width=" + getWidth() + " ,height=" + getHeight()
-				+ " ,topBase=" + topBase;
+		return "Trapezoid sidelength=" + getSideLength() + " units ,width=" + getWidth() + " units ,height="
+				+ getHeight() + " units ,topBase=" + topBase + " units, Perimeter=" + findPerimeter() + "units, Area="
+				+ findArea() + " units^2";
 	}
-}// end of Trapezoid class 
+}// end of Trapezoid class
 
 class Rhombus extends Square {
 	private double diagonal1;
@@ -434,11 +441,12 @@ class Rhombus extends Square {
 		return getSideLength() * 4;
 	}
 
-	@Override 
+	@Override
 	public String toString() {
-		return "Rhombus sideLength=" + getSideLength() + " ,diagonal1=" + diagonal1 + " ,diagonal2=" + diagonal2;
+		return "Rhombus sideLength=" + getSideLength() + " units ,diagonal1=" + diagonal1 + " units ,diagonal2="
+				+ diagonal2 + "units, Perimeter=" + findPerimeter() + "units, Area=" + findArea() + " units^2";
 	}
-}// End of Rhombus class 
+}// End of Rhombus class
 
 class Kite extends Rhombus {
 	private double otherSide;
@@ -464,10 +472,12 @@ class Kite extends Rhombus {
 		return 2 * (otherSide + getSideLength());
 	}
 
-	@Override 
+	@Override
 	public String toString() {
-		return "Kite sideLength=" + getSideLength() + " ,diagonal1=" + getDiagonal1() + " ,diagonal2=" + getDiagonal2()
-				+ " ,otherAdjacentSide=" + otherSide;
+		return "Kite sideLength=" + getSideLength() + " units ,diagonal1=" + getDiagonal1() + " units ,diagonal2="
+				+ getDiagonal2() + " units ,otherAdjacentSide=" + otherSide + " units Perimeter=" + findPerimeter()
+				+ " units Area=" + findArea() + "units^2";
 	}
 
-}// End of Kite class 
+}// End of Kite class
+
