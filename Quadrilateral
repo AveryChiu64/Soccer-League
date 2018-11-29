@@ -1,5 +1,4 @@
 
-
 /*=================================================================
 Program name - Quadrilaterals
 Author - Avery Chiu 
@@ -12,14 +11,13 @@ import java.util.*;
 
 public class Use {
 	public static void main(String[] args) throws IOException {
-		//System objects
+		// System objects
 		ArrayList<Object> list = new ArrayList<Object>();
-	
-		
-		//Method Calls
+
+		// Method Calls
 		menu();
 		while (Quadrilateral.getNumQ() <= 20 && check()) {
-		
+
 			creation(input1(), input2(), list);
 		}
 		menuForData(list);
@@ -201,7 +199,7 @@ public class Use {
 				outputList(list);
 			else if (choice == 2)
 				outputQuad(list);
-			else if(choice==3)
+			else if (choice == 3)
 				numberOfQuads(list);
 
 		}
@@ -210,14 +208,14 @@ public class Use {
 	static void outputList(ArrayList<Object> list) {
 		// System objects
 		Iterator<Object> it = list.iterator();
-		
-		//Variables
-		int count=1;
+
+		// Variables
+		int count = 1;
 
 		System.out.println("		QUADRILATERALS");
 		System.out.println("=============================================================");
 		while (it.hasNext()) {
-			System.out.println("Quadrilateral " +count);
+			System.out.println("Quadrilateral " + count);
 			System.out.println(it.next());
 			count++;
 		} // End of while loop
@@ -231,19 +229,17 @@ public class Use {
 		System.out.println("Please enter the key of the object you want to find");
 		System.out.println("Eg the key for quadrilateral 1 would be 1");
 		System.out.println("=============================================================");
-		System.out.println(list.get(Integer.parseInt(br.readLine())-1));
+		System.out.println(list.get(Integer.parseInt(br.readLine()) - 1));
 		System.out.println("=============================================================");
-	}//End of outputQuad method
-	
-	static void numberOfQuads(ArrayList<Object> list) {
-		//System objects
-		System.out.println("=============================================================");
-		System.out.println("There are a total of " + Quadrilateral.getNumQ() +" quadrilaterals");
-		
-		
-	}//End of numberOfQuads method
-}// End of Use class
+	}// End of outputQuad method
 
+	static void numberOfQuads(ArrayList<Object> list) {
+		// System objects
+		System.out.println("=============================================================");
+		System.out.println("There are a total of " + Quadrilateral.getNumQ() + " quadrilaterals");
+
+	}// End of numberOfQuads method
+}// End of Use class
 
 
 /*=================================================================
@@ -280,14 +276,20 @@ public abstract class Quadrilateral {
 
 class Square extends Quadrilateral {
 	private double sideLength;
-	private int numSquareCount;
+	private static int numSquareCount = 0;
 
 	public Square() {
 		super();
 		sideLength = 1;
-		if (getClass() == Square.class)
+		if (getClass().equals(Square.class))
 			numSquareCount++;
+	}
 
+	public Square(int sideLength) {
+		super();
+		this.sideLength = sideLength;
+		if (getClass().equals(Square.class))
+			numSquareCount++;
 	}
 
 	public double getSideLength() {
@@ -296,6 +298,10 @@ class Square extends Quadrilateral {
 
 	public void setSideLength(double sideLength) {
 		this.sideLength = sideLength;
+	}
+
+	public int getNumSquareCount() {
+		return numSquareCount;
 	}
 
 	public double findArea() {
@@ -311,14 +317,36 @@ class Square extends Quadrilateral {
 		return "Square sideLength=" + sideLength + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea()
 				+ " units^2";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Square) {
+			Square c = (Square) o;
+			if (this.sideLength == c.sideLength)
+				return true;
+		}
+		return false;
+
+	}
+
 }// End of Square class
 
 class Rectangle extends Square {
 	private double width;
+	private static int numRectangleCount = 0;
 
 	public Rectangle() {
 		super();
 		width = 1;
+		if (getClass().equals(Rectangle.class))
+			numRectangleCount++;
+	}
+
+	public Rectangle(int sideLength, int width) {
+		super(sideLength);
+		this.width = width;
+		if (getClass().equals(Rectangle.class))
+			numRectangleCount++;
 	}
 
 	public double getWidth() {
@@ -327,6 +355,10 @@ class Rectangle extends Square {
 
 	public void setWidth(double width) {
 		this.width = width;
+	}
+
+	public int getNumRectangleCount() {
+		return numRectangleCount;
 	}
 
 	public double findArea() {
@@ -342,14 +374,35 @@ class Rectangle extends Square {
 		return "Rectangle sidelength=" + getSideLength() + " units, width=" + width + " units, Perimeter="
 				+ findPerimeter() + " units Area=" + findArea() + " units^2";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Rectangle) {
+			Rectangle c = (Rectangle) o;
+			if (getSideLength() == c.getSideLength() && this.width == c.width)
+				return true;
+		}
+		return false;
+
+	}
 }// End of Rectangle class
 
 class Parallelogram extends Rectangle {
 	private double height;
+	private static int numParallelogramCount = 0;
 
 	public Parallelogram() {
 		super();
 		height = 1;
+		if (getClass().equals(Parallelogram.class))
+			numParallelogramCount++;
+	}
+
+	public Parallelogram(int sideLength, int width, int height) {
+		super(sideLength, width);
+		this.height = height;
+		if (getClass().equals(Parallelogram.class))
+			numParallelogramCount++;
 	}
 
 	public void setHeight(double height) {
@@ -358,6 +411,10 @@ class Parallelogram extends Rectangle {
 
 	public double getHeight() {
 		return height;
+	}
+
+	public int getNumParallelogramCount() {
+		return numParallelogramCount;
 	}
 
 	public double findArea() {
@@ -373,14 +430,35 @@ class Parallelogram extends Rectangle {
 		return "Parallelogram sidelength= " + getSideLength() + " units, width=" + getWidth() + " units,  height="
 				+ height + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea() + " units^2";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Parallelogram) {
+			Parallelogram c = (Parallelogram) o;
+			if (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && this.height == c.height)
+				return true;
+		}
+		return false;
+
+	}
 }// End of Parallelogram class
 
 class Trapezoid extends Parallelogram {
 	private double topBase;
+	private static int numTrapezoidCount = 0;
 
 	public Trapezoid() {
 		super();
 		topBase = 1;
+		if (getClass().equals(Trapezoid.class))
+			numTrapezoidCount++;
+	}
+
+	public Trapezoid(int sideLength, int width, int height, int topBase) {
+		super(sideLength, width, height);
+		this.topBase = topBase;
+		if (getClass().equals(Trapezoid.class))
+			numTrapezoidCount++;
 	}
 
 	public void setTopBase(double topBase) {
@@ -389,6 +467,10 @@ class Trapezoid extends Parallelogram {
 
 	public double getOtherSide() {
 		return topBase;
+	}
+
+	public int getNumTrapezoidCount() {
+		return numTrapezoidCount;
 	}
 
 	public double findArea() {
@@ -405,16 +487,39 @@ class Trapezoid extends Parallelogram {
 				+ getHeight() + " units ,topBase=" + topBase + " units, Perimeter=" + findPerimeter() + "units, Area="
 				+ findArea() + " units^2";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Trapezoid) {
+			Trapezoid c = (Trapezoid) o;
+			if (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && getHeight() == c.getHeight()
+					&& this.topBase == c.topBase)
+				return true;
+		}
+		return false;
+
+	}
 }// end of Trapezoid class
 
 class Rhombus extends Square {
 	private double diagonal1;
 	private double diagonal2;
+	private static int numRhombusCount = 0;
 
 	public Rhombus() {
 		super();
 		diagonal1 = 1;
 		diagonal2 = 1;
+		if (getClass().equals(Rhombus.class))
+			numRhombusCount++;
+	}
+
+	public Rhombus(int sideLength, int diagonal1, int diagonal2) {
+		super(sideLength);
+		this.diagonal1 = diagonal1;
+		this.diagonal2 = diagonal2;
+		if (getClass().equals(Rhombus.class))
+			numRhombusCount++;
 	}
 
 	public void setDiagonal1(double diagonal1) {
@@ -433,6 +538,10 @@ class Rhombus extends Square {
 		return diagonal2;
 	}
 
+	public int getNumRhombusCount() {
+		return numRhombusCount;
+	}
+
 	public double findArea() {
 		return (diagonal1 * diagonal2) / 2;
 	}
@@ -446,14 +555,35 @@ class Rhombus extends Square {
 		return "Rhombus sideLength=" + getSideLength() + " units ,diagonal1=" + diagonal1 + " units ,diagonal2="
 				+ diagonal2 + "units, Perimeter=" + findPerimeter() + "units, Area=" + findArea() + " units^2";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Rhombus) {
+			Rhombus c = (Rhombus) o;
+			if (getSideLength() == c.getSideLength() && this.diagonal1 == c.diagonal1 && this.diagonal2 == c.diagonal2)
+				return true;
+		}
+		return false;
+
+	}
 }// End of Rhombus class
 
 class Kite extends Rhombus {
 	private double otherSide;
+	private static int numKiteCount = 0;
 
 	public Kite() {
 		super();
 		otherSide = 1;
+		if (getClass().equals(Kite.class))
+			numKiteCount++;
+	}
+
+	public Kite(int sideLength, int diagonal1, int diagonal2, int otherSide) {
+		super(sideLength, diagonal1, diagonal2);
+		this.otherSide = otherSide;
+		if (getClass().equals(Kite.class))
+			numKiteCount++;
 	}
 
 	public void setOtherSide(double otherSide) {
@@ -462,6 +592,10 @@ class Kite extends Rhombus {
 
 	public double getOtherSide() {
 		return otherSide;
+	}
+
+	public int getNumKiteCount() {
+		return numKiteCount;
 	}
 
 	public double findArea() {
@@ -475,8 +609,20 @@ class Kite extends Rhombus {
 	@Override
 	public String toString() {
 		return "Kite sideLength=" + getSideLength() + " units ,diagonal1=" + getDiagonal1() + " units ,diagonal2="
-				+ getDiagonal2() + " units ,otherAdjacentSide=" + otherSide + " units Perimeter=" + findPerimeter()
+				+ getDiagonal2() + " units ,other adjacent side=" + otherSide + " units Perimeter=" + findPerimeter()
 				+ " units Area=" + findArea() + "units^2";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Kite) {
+			Kite c = (Kite) o;
+			if (getSideLength() == c.getSideLength() && getDiagonal1() == c.getDiagonal1()
+					&& getDiagonal2() == c.getDiagonal2() && this.otherSide == c.otherSide)
+				return true;
+		}
+		return false;
+
 	}
 
 }// End of Kite class
