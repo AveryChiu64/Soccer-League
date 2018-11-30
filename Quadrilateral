@@ -6,249 +6,6 @@ Date - 2018/11/19
 Programming Language, version number - Java 9
 =================================================================
  */
-import java.io.*;
-import java.util.*;
-
-public class Use {
-	public static void main(String[] args) throws IOException {
-		// System objects
-		ArrayList<Object> list = new ArrayList<Object>();
-
-		// Method Calls
-		menu();
-		while (Quadrilateral.getNumQ() <= 20 && check()) {
-
-			creation(input1(), input2(), list);
-		}
-		menuForData(list);
-
-	}
-
-	/**
-	 * menu method: This procedural method outputs the menu which provides details
-	 * for the user regarding the program.
-	 * 
-	 * @param None
-	 * @throws None
-	 * @return void
-	 */
-	static void menu() {
-		System.out.println("=============================================================");
-		System.out.println("                WELCOME TO THE QUADRILATERAL CREATOR");
-		System.out.println("This program creates and stores a list of 20 quadrilaterals");
-		System.out.println("You may create up to 20 quadrilaterals");
-		System.out.println("=============================================================");
-
-	}// End of menu method
-
-	static boolean check() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("=============================================================");
-		System.out.println("Would you like to create a (or keep making more) shape(s)?");
-		System.out.println("Once you choose to stop creating shapes");
-		System.out.println("You will be able to search through your database for shapes");
-		System.out.println("Type a number to respond");
-		System.out.println("\t1.Yes");
-		System.out.println("\t2.No");
-		System.out.println("=============================================================");
-		return Integer.parseInt(br.readLine()) == 1;
-	}// End of check method
-
-	static boolean input1() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("=============================================================");
-		System.out.println("Would you like to create a default or custom shape?");
-		System.out.println("Default shapes will automatically have units of 1 for each property");
-		System.out.println("Custom shapes allow you to choose the properties (eg side length, height etc)");
-		System.out.println("\t1.Default");
-		System.out.println("\t2.Custom");
-		System.out.println("=============================================================");
-		return Integer.parseInt(br.readLine()) == 1;
-	}// End of input1 method
-
-	static int input2() throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("=============================================================");
-		System.out.println("Please enter an option");
-		System.out.println("\t1.Square");
-		System.out.println("\t2.Rectangle");
-		System.out.println("\t3.Parallelogram");
-		System.out.println("\t4.Trapezoid");
-		System.out.println("\t5.Rhombus");
-		System.out.println("\t6.Kite");
-		System.out.println("=============================================================");
-		return Integer.parseInt(br.readLine());
-
-	}// End of input2 method
-
-	static void creation(boolean choice1, int choice2, ArrayList<Object> list) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		if (choice1) {
-			switch (choice2) {
-			case 1:
-				Square sq = new Square();
-				list.add(sq);
-				break;
-			case 2:
-				Rectangle rec = new Rectangle();
-				list.add(rec);
-				break;
-			case 3:
-				Parallelogram par = new Parallelogram();
-				list.add(par);
-				break;
-			case 4:
-				Trapezoid trap = new Trapezoid();
-				list.add(trap);
-				break;
-			case 5:
-				Rhombus rhom = new Rhombus();
-				list.add(rhom);
-				break;
-			case 6:
-				Kite kit = new Kite();
-				list.add(kit);
-				break;
-			default:
-				System.out.println("Please re-enter a proper option");
-			}// End of switch case
-		} // End of default shape
-		else {
-			switch (choice2) {
-			case 1:
-				Square sq = new Square();
-				System.out.println("Please enter a side length");
-				sq.setSideLength(Double.parseDouble(br.readLine()));
-				list.add(sq);
-				break;
-			case 2:
-				Rectangle rec = new Rectangle();
-				System.out.println("Please enter a side length");
-				rec.setSideLength(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a width");
-				rec.setWidth(Double.parseDouble(br.readLine()));
-				list.add(rec);
-				break;
-			case 3:
-				Parallelogram par = new Parallelogram();
-				System.out.println("Please enter a side length");
-				par.setSideLength(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a width");
-				par.setWidth(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a height");
-				par.setHeight(Double.parseDouble(br.readLine()));
-				list.add(par);
-				break;
-			case 4:
-				Trapezoid trap = new Trapezoid();
-				System.out.println("Please enter a side length");
-				trap.setSideLength(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a width (bottom base)");
-				trap.setWidth(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a height");
-				trap.setHeight(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a the top base");
-				trap.setTopBase(Double.parseDouble(br.readLine()));
-				list.add(trap);
-				break;
-			case 5:
-				Rhombus rhom = new Rhombus();
-				System.out.println("Please enter a side length");
-				rhom.setSideLength(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a diagonal length 1");
-				rhom.setDiagonal1(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a diagonal length 2");
-				rhom.setDiagonal2(Double.parseDouble(br.readLine()));
-				list.add(rhom);
-				break;
-			case 6:
-				Kite kit = new Kite();
-				System.out.println("Please enter the side length of the first adjacent sides");
-				kit.setSideLength(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter the length of the other adjacent side");
-				kit.setOtherSide(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a diagonal length 1");
-				kit.setDiagonal1(Double.parseDouble(br.readLine()));
-				System.out.println("Please enter a diagonal length 2");
-				kit.setDiagonal2(Double.parseDouble(br.readLine()));
-				list.add(kit);
-				break;
-			default:
-				System.out.println("Please re-enter a proper option");
-			}// End of switch case
-		} // End of custom shape
-
-		System.out.println("The shape you just created will be stored as quadrilateral " + Quadrilateral.getNumQ());
-	}// End of creation method
-
-	static void menuForData(ArrayList<Object> list) throws IOException {
-		int choice = 0;
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("You have succesfully created your quadrilaterals");
-
-		while (choice != 4) {
-			System.out.println("=============================================================");
-			System.out.println("Please choose an option");
-			System.out.println("\t1.Show a list of all the quadrilaterals created");
-			System.out.println("\t2.Find a specific quadrilateral based off of its key (number assigned)");
-			System.out.println("\t3.Show the number of objects created and the number of each object created");
-			System.out.println("\t4.End the program");
-			System.out.println("=============================================================");
-			choice = Integer.parseInt(br.readLine());
-			if (choice == 1)
-				outputList(list);
-			else if (choice == 2)
-				outputQuad(list);
-			else if (choice == 3)
-				numberOfQuads(list);
-
-		}
-	}
-
-	static void outputList(ArrayList<Object> list) {
-		// System objects
-		Iterator<Object> it = list.iterator();
-
-		// Variables
-		int count = 1;
-
-		System.out.println("		QUADRILATERALS");
-		System.out.println("=============================================================");
-		while (it.hasNext()) {
-			System.out.println("Quadrilateral " + count);
-			System.out.println(it.next());
-			count++;
-		} // End of while loop
-		System.out.println("=============================================================");
-	}// End of outputList method
-
-	static void outputQuad(ArrayList<Object> list) throws IOException {
-		// System objects
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("=============================================================");
-		System.out.println("Please enter the key of the object you want to find");
-		System.out.println("Eg the key for quadrilateral 1 would be 1");
-		System.out.println("=============================================================");
-		System.out.println(list.get(Integer.parseInt(br.readLine()) - 1));
-		System.out.println("=============================================================");
-	}// End of outputQuad method
-
-	static void numberOfQuads(ArrayList<Object> list) {
-		// System objects
-		System.out.println("=============================================================");
-		System.out.println("There are a total of " + Quadrilateral.getNumQ() + " quadrilaterals");
-
-	}// End of numberOfQuads method
-}// End of Use class
-
-
-/*=================================================================
-Program name - Quadrilaterals
-Author - Avery Chiu 
-Date - 2018/11/19
-Programming Language, version number - Java 9
-=================================================================
- */
 
 //****************************************************************************************
 //<Class> 
@@ -268,6 +25,8 @@ public abstract class Quadrilateral {
 		return numQ;
 	}
 
+	public abstract String getKey();
+
 	public abstract double findArea();
 
 	public abstract double findPerimeter();
@@ -277,12 +36,15 @@ public abstract class Quadrilateral {
 class Square extends Quadrilateral {
 	private double sideLength;
 	private static int numSquareCount = 0;
+	private String key;
 
 	public Square() {
 		super();
 		sideLength = 1;
-		if (getClass().equals(Square.class))
+		if (getClass().equals(Square.class)) {
 			numSquareCount++;
+			key = "Sq" + numSquareCount;
+		}
 	}
 
 	public Square(int sideLength) {
@@ -290,6 +52,11 @@ class Square extends Quadrilateral {
 		this.sideLength = sideLength;
 		if (getClass().equals(Square.class))
 			numSquareCount++;
+		key = "Sq" + numSquareCount;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public double getSideLength() {
@@ -626,4 +393,3 @@ class Kite extends Rhombus {
 	}
 
 }// End of Kite class
-
