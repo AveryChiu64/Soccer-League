@@ -43,16 +43,16 @@ class Square extends Quadrilateral {
 		sideLength = 1;
 		if (getClass().equals(Square.class)) {
 			numSquareCount++;
-			key = "Sq" + numSquareCount;
+			key = "squ" + numSquareCount;
 		}
 	}
 
-	public Square(int sideLength) {
+	public Square(double sideLength) {
 		super();
 		this.sideLength = sideLength;
 		if (getClass().equals(Square.class))
 			numSquareCount++;
-		key = "Sq" + numSquareCount;
+		key = "squ" + numSquareCount;
 	}
 
 	public String getKey() {
@@ -67,7 +67,7 @@ class Square extends Quadrilateral {
 		this.sideLength = sideLength;
 	}
 
-	public int getNumSquareCount() {
+	public static int getNumSquareCount() {
 		return numSquareCount;
 	}
 
@@ -101,19 +101,26 @@ class Square extends Quadrilateral {
 class Rectangle extends Square {
 	private double width;
 	private static int numRectangleCount = 0;
+	private String key;
 
 	public Rectangle() {
 		super();
 		width = 1;
 		if (getClass().equals(Rectangle.class))
 			numRectangleCount++;
+		key = "rec" + numRectangleCount;
 	}
 
-	public Rectangle(int sideLength, int width) {
+	public Rectangle(double sideLength, double width) {
 		super(sideLength);
 		this.width = width;
 		if (getClass().equals(Rectangle.class))
 			numRectangleCount++;
+		key = "rec" + numRectangleCount;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public double getWidth() {
@@ -124,7 +131,7 @@ class Rectangle extends Square {
 		this.width = width;
 	}
 
-	public int getNumRectangleCount() {
+	public static int getNumRectangleCount() {
 		return numRectangleCount;
 	}
 
@@ -157,19 +164,26 @@ class Rectangle extends Square {
 class Parallelogram extends Rectangle {
 	private double height;
 	private static int numParallelogramCount = 0;
+	private String key;
 
 	public Parallelogram() {
 		super();
 		height = 1;
 		if (getClass().equals(Parallelogram.class))
 			numParallelogramCount++;
+		key = "par" + numParallelogramCount;
 	}
 
-	public Parallelogram(int sideLength, int width, int height) {
+	public Parallelogram(double sideLength, double width, double height) {
 		super(sideLength, width);
 		this.height = height;
 		if (getClass().equals(Parallelogram.class))
 			numParallelogramCount++;
+		key = "par" + numParallelogramCount;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public void setHeight(double height) {
@@ -180,7 +194,7 @@ class Parallelogram extends Rectangle {
 		return height;
 	}
 
-	public int getNumParallelogramCount() {
+	public static int getNumParallelogramCount() {
 		return numParallelogramCount;
 	}
 
@@ -213,19 +227,25 @@ class Parallelogram extends Rectangle {
 class Trapezoid extends Parallelogram {
 	private double topBase;
 	private static int numTrapezoidCount = 0;
+	private String key;
 
 	public Trapezoid() {
 		super();
 		topBase = 1;
 		if (getClass().equals(Trapezoid.class))
 			numTrapezoidCount++;
+		key = "tra" + numTrapezoidCount;
 	}
 
-	public Trapezoid(int sideLength, int width, int height, int topBase) {
+	public Trapezoid(double sideLength, double width, double height, double topBase) {
 		super(sideLength, width, height);
 		this.topBase = topBase;
 		if (getClass().equals(Trapezoid.class))
 			numTrapezoidCount++;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public void setTopBase(double topBase) {
@@ -236,7 +256,7 @@ class Trapezoid extends Parallelogram {
 		return topBase;
 	}
 
-	public int getNumTrapezoidCount() {
+	public static int getNumTrapezoidCount() {
 		return numTrapezoidCount;
 	}
 
@@ -272,6 +292,7 @@ class Rhombus extends Square {
 	private double diagonal1;
 	private double diagonal2;
 	private static int numRhombusCount = 0;
+	private String key;
 
 	public Rhombus() {
 		super();
@@ -279,14 +300,20 @@ class Rhombus extends Square {
 		diagonal2 = 1;
 		if (getClass().equals(Rhombus.class))
 			numRhombusCount++;
+		key = "rho" + numRhombusCount;
 	}
 
-	public Rhombus(int sideLength, int diagonal1, int diagonal2) {
+	public Rhombus(double sideLength, double diagonal1, double diagonal2) {
 		super(sideLength);
 		this.diagonal1 = diagonal1;
 		this.diagonal2 = diagonal2;
 		if (getClass().equals(Rhombus.class))
 			numRhombusCount++;
+		key = "rho" + numRhombusCount;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public void setDiagonal1(double diagonal1) {
@@ -305,7 +332,7 @@ class Rhombus extends Square {
 		return diagonal2;
 	}
 
-	public int getNumRhombusCount() {
+	public static int getNumRhombusCount() {
 		return numRhombusCount;
 	}
 
@@ -338,19 +365,26 @@ class Rhombus extends Square {
 class Kite extends Rhombus {
 	private double otherSide;
 	private static int numKiteCount = 0;
+	private String key;
 
 	public Kite() {
 		super();
 		otherSide = 1;
 		if (getClass().equals(Kite.class))
 			numKiteCount++;
+		key = "kit" + numKiteCount;
 	}
 
-	public Kite(int sideLength, int diagonal1, int diagonal2, int otherSide) {
+	public Kite(double sideLength, double diagonal1, double diagonal2, double otherSide) {
 		super(sideLength, diagonal1, diagonal2);
 		this.otherSide = otherSide;
 		if (getClass().equals(Kite.class))
 			numKiteCount++;
+		key = "kit" + numKiteCount;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public void setOtherSide(double otherSide) {
@@ -361,7 +395,7 @@ class Kite extends Rhombus {
 		return otherSide;
 	}
 
-	public int getNumKiteCount() {
+	public static int getNumKiteCount() {
 		return numKiteCount;
 	}
 
@@ -375,7 +409,7 @@ class Kite extends Rhombus {
 
 	@Override
 	public String toString() {
-		return "Kite sideLength=" + getSideLength() + " units ,diagonal1=" + getDiagonal1() + " units ,diagonal2="
+		return "Kite sideLength=" + getSideLength() + " units ,diagonal1= " + getDiagonal1() + " units ,diagonal2="
 				+ getDiagonal2() + " units ,other adjacent side=" + otherSide + " units Perimeter=" + findPerimeter()
 				+ " units Area=" + findArea() + "units^2";
 	}
