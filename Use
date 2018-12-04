@@ -21,6 +21,7 @@ public class Use {
 			creation(input1(), input2(), list);
 		}
 		menuForData(list);
+		System.out.println("You have ended the program");
 
 	}
 
@@ -104,7 +105,7 @@ public class Use {
 				if (confirmShape()) {
 					Rectangle rec = new Rectangle();
 					list.add(rec);
-					System.out.println("The shape you just created will be stored as" + rec.getKey());
+					System.out.println("The shape you just created will be stored as " + rec.getKey());
 				}
 				break;
 			case 3:
@@ -114,7 +115,7 @@ public class Use {
 				if (confirmShape()) {
 					Parallelogram par = new Parallelogram();
 					list.add(par);
-					System.out.println("The shape you just created will be stored as" + par.getKey());
+					System.out.println("The shape you just created will be stored as " + par.getKey());
 				}
 				break;
 			case 4:
@@ -125,7 +126,7 @@ public class Use {
 				if (confirmShape()) {
 					Trapezoid trap = new Trapezoid();
 					list.add(trap);
-					System.out.println("The shape you just created will be stored as" + trap.getKey());
+					System.out.println("The shape you just created will be stored as " + trap.getKey());
 				}
 				break;
 			case 5:
@@ -135,7 +136,7 @@ public class Use {
 				if (confirmShape()) {
 					Rhombus rhom = new Rhombus();
 					list.add(rhom);
-					System.out.println("The shape you just created will be stored as" + rhom.getKey());
+					System.out.println("The shape you just created will be stored as " + rhom.getKey());
 				}
 				break;
 			case 6:
@@ -146,7 +147,7 @@ public class Use {
 				if (confirmShape()) {
 					Kite kite = new Kite();
 					list.add(kite);
-					System.out.println("The shape you just created will be stored as" + kite.getKey());
+					System.out.println("The shape you just created will be stored as " + kite.getKey());
 				}
 				break;
 			default:
@@ -162,7 +163,7 @@ public class Use {
 				if (confirmShape()) {
 					Square sq = new Square(sideLength);
 					list.add(sq);
-					System.out.println("The shape you just created will be stored as" + sq.getKey());
+					System.out.println("The shape you just created will be stored as " + sq.getKey());
 				}
 				break;
 			case 2:
@@ -175,7 +176,7 @@ public class Use {
 				if (confirmShape()) {
 					Rectangle rec = new Rectangle(sideLength, width);
 					list.add(rec);
-					System.out.println("The shape you just created will be stored as" + rec.getKey());
+					System.out.println("The shape you just created will be stored as " + rec.getKey());
 				}
 				break;
 			case 3:
@@ -191,7 +192,7 @@ public class Use {
 				if (confirmShape()) {
 					Parallelogram par = new Parallelogram();
 					list.add(par);
-					System.out.println("The shape you just created will be stored as" + par.getKey());
+					System.out.println("The shape you just created will be stored as " + par.getKey());
 				}
 				break;
 			case 4:
@@ -211,7 +212,7 @@ public class Use {
 				if (confirmShape()) {
 					Trapezoid trap = new Trapezoid();
 					list.add(trap);
-					System.out.println("The shape you just created will be stored as" + trap.getKey());
+					System.out.println("The shape you just created will be stored as " + trap.getKey());
 				}
 				break;
 			case 5:
@@ -249,7 +250,7 @@ public class Use {
 				if (confirmShape()) {
 					Kite kite = new Kite();
 					list.add(kite);
-					System.out.println("The shape you just created will be stored as" + kite.getKey());
+					System.out.println("The shape you just created will be stored as " + kite.getKey());
 				}
 				break;
 			default:
@@ -263,9 +264,9 @@ public class Use {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Are you sure you want this shape");
 		System.out.println("\t1.Yes");
-		System.out.println("\t2.No,let me choose again");
+		System.out.println("\t2.No,let me choose again/Exit");
 		return Integer.parseInt(br.readLine()) == 1;
-	}
+	}// End of confirmShape method
 
 	static void menuForData(ArrayList<Quadrilateral> list) throws IOException {
 		int choice = 0;
@@ -276,7 +277,7 @@ public class Use {
 			System.out.println("=============================================================");
 			System.out.println("Please choose an option");
 			System.out.println("\t1.Show a list of all the quadrilaterals created");
-			System.out.println("\t2.Find a specific quadrilateral based off of its key (number assigned)");
+			System.out.println("\t2.Find a specific quadrilateral based off of its key");
 			System.out.println("\t3.Show the number of objects created and the number of each object created");
 			System.out.println("\t4.End the program");
 			System.out.println("=============================================================");
@@ -311,24 +312,116 @@ public class Use {
 	static void outputQuad(ArrayList<Quadrilateral> list) throws IOException {
 		// System objects
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Iterator<Quadrilateral> it = list.iterator();
-		
-		//Local Variables
-		String userInput=null;
-		
+
+		// Local Variables
+		String userInput = null;
+		int i;
+
 		System.out.println("=============================================================");
 		System.out.println("Please enter the key of the object you want to find");
 		System.out.println("Please enter the first three letters of the shape");
 		System.out.println("and the number beside it");
 		System.out.println("Eg the key for the 1st Square you made would be squ1");
 		System.out.println("=============================================================");
-		while (it.hasNext()) {
-			if(userInput.equals(((it.next()).getKey())))
-				System.out.println(it.next());
-					
+		while (true) {
+			userInput = br.readLine();
+			for (i = 0; i < list.size(); i++) {
+				if (userInput.equals(((list.get(i)).getKey())))
+					System.out.println(list.get(i));
+			}
+			if (i - 1 < list.size())
+				break;
+			else
+				System.out.println("Please enter proper input");
 		}
 		System.out.println("=============================================================");
+		System.out.println("Would you like to change the properties of this shape and");
+		if (confirmShape()) {
+			modify(list, i);
+		}
+
 	}// End of outputQuad method
+
+	static void modify(ArrayList<Quadrilateral> list, int index) throws IOException {
+		// System Objects
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		// Variables
+		int userInput = 0;
+		double newLength = 0;
+
+		System.out.println("What property would you like to change?");
+		System.out.println("\t1.Side Length");
+		System.out.println("\t2.Width");
+		System.out.println("\t3.Height");
+		System.out.println("\t4.Top Base");
+		System.out.println("\t5.Other Adjacent Side");
+		System.out.println("\t6.Diagonal 1");
+		System.out.println("\t7.Diagonal 2");
+
+		while (true) {
+			try {
+				userInput = Integer.parseInt(br.readLine());
+				switch (userInput) {
+				case 1:
+					System.out.println("The current side length is " + ((Square) list.get(index - 1)).getSideLength());
+					System.out.println("Please enter a new side length");
+					newLength = Double.parseDouble(br.readLine());
+					((Square) list.get(index - 1)).setSideLength(newLength);
+					System.out.println("The new side length is " + newLength + " unit(s)");
+					break;
+				case 2:
+					System.out.println("The current width is " + ((Rectangle) list.get(index - 1)).getWidth());
+					System.out.println("Please enter a new width");
+					newLength = Double.parseDouble(br.readLine());
+					((Rectangle) list.get(index - 1)).setWidth(newLength);
+					System.out.println("The new width is " + newLength + " unit(s)");
+					break;
+				case 3:
+					System.out.println("The current height is " + ((Parallelogram) list.get(index - 1)).getHeight());
+					System.out.println("Please enter a new height");
+					newLength = Double.parseDouble(br.readLine());
+					((Parallelogram) list.get(index - 1)).setHeight(newLength);
+					System.out.println("The new height is " + newLength + " unit(s)");
+					break;
+				case 4:
+					System.out.println("The current top base is " + ((Trapezoid) list.get(index - 1)).getTopBase());
+					System.out.println("Please enter a new top base");
+					newLength = Double.parseDouble(br.readLine());
+					((Trapezoid) list.get(index - 1)).setTopBase(newLength);
+					System.out.println("The new top base is " + newLength + " unit(s)");
+					break;
+				case 5:
+					System.out.println(
+							"The current other adjacent side is " + ((Kite) list.get(index - 1)).getOtherSide());
+					System.out.println("Please enter a new length for the other adjacent side");
+					newLength = Double.parseDouble(br.readLine());
+					((Kite) list.get(index - 1)).setOtherSide(newLength);
+					System.out.println("The new length for the other adjacent side is " + newLength + " unit(s)");
+					break;
+				case 6:
+					System.out.println("The current diagonal 1 is " + ((Rhombus) list.get(index - 1)).getDiagonal1());
+					System.out.println("Please enter a new length for Diagonal 1");
+					newLength = Double.parseDouble(br.readLine());
+					((Rhombus) list.get(index - 1)).setDiagonal1(newLength);
+					System.out.println("The new length for diagonal 1 is " + newLength + " unit(s)");
+					break;
+				case 7:
+					System.out.println("The current diagonal 2 is " + ((Rhombus) list.get(index - 1)).getDiagonal2());
+					System.out.println("Please enter a new length for Diagonal 2");
+					newLength = Double.parseDouble(br.readLine());
+					((Rhombus) list.get(index - 1)).setDiagonal2(newLength);
+					System.out.println("The new length for diagonal 2 is " + newLength + " unit(s)");
+					break;
+				}
+				break;
+
+			} catch (Exception e) {
+				System.out.println("That value does not exist for the shape");
+				System.out.println("Please enter proper input");
+			}
+		}
+
+	}
 
 	static void numberOfQuads(ArrayList<Quadrilateral> list) {
 		// System objects
