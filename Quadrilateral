@@ -7,13 +7,6 @@ Programming Language, version number - Java 9
 =================================================================
  */
 
-//****************************************************************************************
-//<Class> 
-
-//<List Of Identifiers
-
-//****************************************************************************************
-
 public abstract class Quadrilateral {
 	private static int numQ = 0;
 
@@ -81,8 +74,8 @@ class Square extends Quadrilateral {
 
 	@Override
 	public String toString() {
-		return "Square sideLength=" + sideLength + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea()
-				+ " units^2";
+		return "Square key= " + key + " sideLength=" + sideLength + " units, Perimeter=" + findPerimeter()
+				+ " units, Area=" + findArea() + " units^2";
 	}
 
 	@Override
@@ -104,7 +97,7 @@ class Rectangle extends Square {
 	private String key;
 
 	public Rectangle() {
-		super();
+			super();
 		width = 1;
 		if (getClass().equals(Rectangle.class))
 			numRectangleCount++;
@@ -145,8 +138,8 @@ class Rectangle extends Square {
 
 	@Override
 	public String toString() {
-		return "Rectangle sidelength=" + getSideLength() + " units, width=" + width + " units, Perimeter="
-				+ findPerimeter() + " units Area=" + findArea() + " units^2";
+		return "Rectangle key= " + key + " sidelength=" + getSideLength() + " units, width=" + width
+				+ " units, Perimeter=" + findPerimeter() + " units Area=" + findArea() + " units^2";
 	}
 
 	@Override
@@ -208,8 +201,9 @@ class Parallelogram extends Rectangle {
 
 	@Override
 	public String toString() {
-		return "Parallelogram sidelength= " + getSideLength() + " units, width=" + getWidth() + " units,  height="
-				+ height + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea() + " units^2";
+		return "Parallelogram key= " + key + " sidelength= " + getSideLength() + " units, width=" + getWidth()
+				+ " units,  height=" + height + " units, Perimeter=" + findPerimeter() + " units, Area=" + findArea()
+				+ " units^2";
 	}
 
 	@Override
@@ -247,12 +241,13 @@ class Trapezoid extends Parallelogram {
 	public String getKey() {
 		return key;
 	}
+	
 
 	public void setTopBase(double topBase) {
 		this.topBase = topBase;
 	}
 
-	public double getOtherSide() {
+	public double getTopBase() {
 		return topBase;
 	}
 
@@ -270,9 +265,9 @@ class Trapezoid extends Parallelogram {
 
 	@Override
 	public String toString() {
-		return "Trapezoid sidelength=" + getSideLength() + " units ,width=" + getWidth() + " units ,height="
-				+ getHeight() + " units ,topBase=" + topBase + " units, Perimeter=" + findPerimeter() + "units, Area="
-				+ findArea() + " units^2";
+		return "Trapezoid key= " + key + " sidelength=" + getSideLength() + " units ,width=" + getWidth()
+				+ " units ,height=" + getHeight() + " units ,topBase=" + topBase + " units, Perimeter="
+				+ findPerimeter() + "units, Area=" + findArea() + " units^2";
 	}
 
 	@Override
@@ -346,8 +341,9 @@ class Rhombus extends Square {
 
 	@Override
 	public String toString() {
-		return "Rhombus sideLength=" + getSideLength() + " units ,diagonal1=" + diagonal1 + " units ,diagonal2="
-				+ diagonal2 + "units, Perimeter=" + findPerimeter() + "units, Area=" + findArea() + " units^2";
+		return "Rhombus key= " + key + " sideLength=" + getSideLength() + " units ,diagonal1=" + diagonal1
+				+ " units ,diagonal2=" + diagonal2 + "units, Perimeter=" + findPerimeter() + "units, Area=" + findArea()
+				+ " units^2";
 	}
 
 	@Override
@@ -409,9 +405,9 @@ class Kite extends Rhombus {
 
 	@Override
 	public String toString() {
-		return "Kite sideLength=" + getSideLength() + " units ,diagonal1= " + getDiagonal1() + " units ,diagonal2="
-				+ getDiagonal2() + " units ,other adjacent side=" + otherSide + " units Perimeter=" + findPerimeter()
-				+ " units Area=" + findArea() + "units^2";
+		return "Kite key= " + key + " sideLength=" + getSideLength() + " units ,diagonal1= " + getDiagonal1()
+				+ " units ,diagonal2=" + getDiagonal2() + " units ,other adjacent side=" + otherSide
+				+ " units Perimeter=" + findPerimeter() + " units Area=" + findArea() + "units^2";
 	}
 
 	@Override
