@@ -157,101 +157,110 @@ public class Use {
 		else {
 			switch (choice2) {
 			case 1:
-				System.out.println("Please enter a side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("The side length of the square will be " + sideLength + " unit(s)");
-				if (confirmShape()) {
-					Square sq = new Square(sideLength);
-					list.add(sq);
-					System.out.println("The shape you just created will be stored as " + sq.getKey());
-				}
+				do {
+					System.out.println("Please enter a side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("The side length of the square will be " + sideLength + " unit(s)");
+				} while (confirmShape() == false);
+
+				Square sq = new Square(sideLength);
+				list.add(sq);
+				System.out.println("The shape you just created will be stored as " + sq.getKey());
+
 				break;
 			case 2:
-				System.out.println("Please enter a side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a width");
-				width = Double.parseDouble(br.readLine());
-				System.out.println("The side length of the rectangle will be " + sideLength + " unit(s)");
-				System.out.println("The width of the rectangle will be " + width + " unit(s)");
-				if (confirmShape()) {
-					Rectangle rec = new Rectangle(sideLength, width);
-					list.add(rec);
-					System.out.println("The shape you just created will be stored as " + rec.getKey());
-				}
+				do {
+					System.out.println("Please enter a side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a width");
+					width = Double.parseDouble(br.readLine());
+					System.out.println("The side length of the rectangle will be " + sideLength + " unit(s)");
+					System.out.println("The width of the rectangle will be " + width + " unit(s)");
+				} while (confirmShape() == false);
+
+				Rectangle rec = new Rectangle(sideLength, width);
+				list.add(rec);
+				System.out.println("The shape you just created will be stored as " + rec.getKey());
+
 				break;
 			case 3:
-				System.out.println("Please enter a side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a width");
-				width = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a height");
-				height = Double.parseDouble(br.readLine());
-				System.out.println("The side length of the parallelogram will be " + sideLength + " unit(s)");
-				System.out.println("The width of the parallelogram will be " + width + " unit(s)");
-				System.out.println("The height of the parallelogram will be " + height + " unit(s)");
-				if (confirmShape()) {
-					Parallelogram par = new Parallelogram();
-					list.add(par);
-					System.out.println("The shape you just created will be stored as " + par.getKey());
-				}
+				do {
+					System.out.println("Please enter a side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a width");
+					width = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a height");
+					height = Double.parseDouble(br.readLine());
+					System.out.println("The side length of the parallelogram will be " + sideLength + " unit(s)");
+					System.out.println("The width of the parallelogram will be " + width + " unit(s)");
+					System.out.println("The height of the parallelogram will be " + height + " unit(s)");
+				} while (confirmShape() == false);
+
+				Parallelogram par = new Parallelogram(sideLength, width, height);
+				list.add(par);
+				System.out.println("The shape you just created will be stored as " + par.getKey());
+
 				break;
 			case 4:
+				do {
+					System.out.println("Please enter a side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a width");
+					width = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a height");
+					height = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a the top base");
+					topBase = Double.parseDouble(br.readLine());
+					System.out.println("The side length of the trapezoid will be " + sideLength + " unit(s)");
+					System.out.println("The width of the trapezoid will be " + width + " unit(s)");
+					System.out.println("The height of the trapezoid will be " + height + " unit(s)");
+					System.out.println("The top base of the trapezoid will be " + topBase + " unit(s)");
+				} while (confirmShape() == false);
 
-				System.out.println("Please enter a side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a width");
-				width = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a height");
-				height = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a the top base");
-				topBase = Double.parseDouble(br.readLine());
-				System.out.println("The side length of the trapezoid will be " + sideLength + " unit(s)");
-				System.out.println("The width of the trapezoid will be " + width + " unit(s)");
-				System.out.println("The height of the trapezoid will be " + height + " unit(s)");
-				System.out.println("The top base of the trapezoid will be " + topBase + " unit(s)");
-				if (confirmShape()) {
-					Trapezoid trap = new Trapezoid();
-					list.add(trap);
-					System.out.println("The shape you just created will be stored as " + trap.getKey());
-				}
+				Trapezoid trap = new Trapezoid(sideLength, width, height, topBase);
+				list.add(trap);
+				System.out.println("The shape you just created will be stored as " + trap.getKey());
+
 				break;
 			case 5:
 
-				System.out.println("Please enter a side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a diagonal length 1");
-				diagonal1 = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a diagonal length 2");
-				diagonal2 = Double.parseDouble(br.readLine());
-				System.out.println("The side length of the rhombus will be " + sideLength + " unit(s)");
-				System.out.println("The 1st diagonal of the rhombus will be " + diagonal1 + " unit(s)");
-				System.out.println("The 2nd diagonal of the rhombus will be " + diagonal2 + " unit(s)");
-				if (confirmShape()) {
-					Rhombus rhom = new Rhombus();
-					list.add(rhom);
-					System.out.println("The shape you just created will be stored as" + rhom.getKey());
-				}
+				do {
+					System.out.println("Please enter a side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a diagonal length 1");
+					diagonal1 = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a diagonal length 2");
+					diagonal2 = Double.parseDouble(br.readLine());
+					System.out.println("The side length of the rhombus will be " + sideLength + " unit(s)");
+					System.out.println("The 1st diagonal of the rhombus will be " + diagonal1 + " unit(s)");
+					System.out.println("The 2nd diagonal of the rhombus will be " + diagonal2 + " unit(s)");
+				} while (confirmShape() == false);
+
+				Rhombus rhom = new Rhombus(sideLength, diagonal1, diagonal2);
+				list.add(rhom);
+				System.out.println("The shape you just created will be stored as " + rhom.getKey());
+
 				break;
 			case 6:
+				do {
+					System.out.println("Please enter the first adjacent side length");
+					sideLength = Double.parseDouble(br.readLine());
+					System.out.println("Please enter the length of the other adjacent side");
+					otherAdjacentSide = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a diagonal length 1");
+					diagonal1 = Double.parseDouble(br.readLine());
+					System.out.println("Please enter a diagonal length 2");
+					diagonal2 = Double.parseDouble(br.readLine());
+					System.out.println("The first adjacent side length of the kite will be " + sideLength + " unit(s)");
+					System.out.println("The other adjacent side of the kite will be " + otherAdjacentSide + " unit(s)");
+					System.out.println("The 1st diagonal of the kite will be " + diagonal1 + " unit(s)");
+					System.out.println("The 2nd diagonal of the kite will be " + diagonal2 + " unit(s)");
+				} while (confirmShape() == false);
 
-				System.out.println("Please enter the first adjacent side length");
-				sideLength = Double.parseDouble(br.readLine());
-				System.out.println("Please enter the length of the other adjacent side");
-				otherAdjacentSide = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a diagonal length 1");
-				diagonal1 = Double.parseDouble(br.readLine());
-				System.out.println("Please enter a diagonal length 2");
-				diagonal2 = Double.parseDouble(br.readLine());
-				System.out.println("The first adjacent side length of the kite will be " + sideLength + " unit(s)");
-				System.out.println("The other adjacent side of the kite will be " + otherAdjacentSide + " unit(s)");
-				System.out.println("The 1st diagonal of the kite will be " + diagonal1 + " unit(s)");
-				System.out.println("The 2nd diagonal of the kite will be " + diagonal2 + " unit(s)");
+				Kite kite = new Kite(sideLength, diagonal1, diagonal2, otherAdjacentSide);
+				list.add(kite);
+				System.out.println("The shape you just created will be stored as " + kite.getKey());
 
-				if (confirmShape()) {
-					Kite kite = new Kite();
-					list.add(kite);
-					System.out.println("The shape you just created will be stored as " + kite.getKey());
-				}
 				break;
 			default:
 				System.out.println("Please re-enter a proper option");
@@ -315,7 +324,7 @@ public class Use {
 
 		// Local Variables
 		String userInput = null;
-		int i;
+		int index = 0;
 
 		System.out.println("=============================================================");
 		System.out.println("Please enter the key of the object you want to find");
@@ -325,19 +334,25 @@ public class Use {
 		System.out.println("=============================================================");
 		while (true) {
 			userInput = br.readLine();
-			for (i = 0; i < list.size(); i++) {
-				if (userInput.equals(((list.get(i)).getKey())))
+			for (int i = 0; i < list.size(); i++) {
+				if (userInput.equals(((list.get(i)).getKey()))) {
 					System.out.println(list.get(i));
+					index = i;
+					break;
+				} else
+					index = list.size();
 			}
-			if (i - 1 < list.size())
+			if (index < list.size()) {
 				break;
-			else
+			} else {
 				System.out.println("Please enter proper input");
+				System.out.println("The shape does not exists");
+			}
 		}
 		System.out.println("=============================================================");
 		System.out.println("Would you like to change the properties of this shape and");
 		if (confirmShape()) {
-			modify(list, i);
+			modify(list, index);
 		}
 
 	}// End of outputQuad method
@@ -363,55 +378,57 @@ public class Use {
 				userInput = Integer.parseInt(br.readLine());
 				switch (userInput) {
 				case 1:
-					System.out.println("The current side length is " + ((Square) list.get(index - 1)).getSideLength());
+					System.out.println("The current side length is " + ((Square) list.get(index)).getSideLength());
 					System.out.println("Please enter a new side length");
 					newLength = Double.parseDouble(br.readLine());
-					((Square) list.get(index - 1)).setSideLength(newLength);
+					((Square) list.get(index)).setSideLength(newLength);
 					System.out.println("The new side length is " + newLength + " unit(s)");
 					break;
 				case 2:
-					System.out.println("The current width is " + ((Rectangle) list.get(index - 1)).getWidth());
+					System.out.println("The current width is " + ((Rectangle) list.get(index)).getWidth());
 					System.out.println("Please enter a new width");
 					newLength = Double.parseDouble(br.readLine());
-					((Rectangle) list.get(index - 1)).setWidth(newLength);
+					((Rectangle) list.get(index)).setWidth(newLength);
 					System.out.println("The new width is " + newLength + " unit(s)");
 					break;
 				case 3:
-					System.out.println("The current height is " + ((Parallelogram) list.get(index - 1)).getHeight());
+					System.out.println("The current height is " + ((Parallelogram) list.get(index)).getHeight());
 					System.out.println("Please enter a new height");
 					newLength = Double.parseDouble(br.readLine());
-					((Parallelogram) list.get(index - 1)).setHeight(newLength);
+					((Parallelogram) list.get(index)).setHeight(newLength);
 					System.out.println("The new height is " + newLength + " unit(s)");
 					break;
 				case 4:
-					System.out.println("The current top base is " + ((Trapezoid) list.get(index - 1)).getTopBase());
+					System.out.println("The current top base is " + ((Trapezoid) list.get(index)).getTopBase());
 					System.out.println("Please enter a new top base");
 					newLength = Double.parseDouble(br.readLine());
-					((Trapezoid) list.get(index - 1)).setTopBase(newLength);
+					((Trapezoid) list.get(index)).setTopBase(newLength);
 					System.out.println("The new top base is " + newLength + " unit(s)");
 					break;
 				case 5:
-					System.out.println(
-							"The current other adjacent side is " + ((Kite) list.get(index - 1)).getOtherSide());
+					System.out.println("The current other adjacent side is " + ((Kite) list.get(index)).getOtherSide());
 					System.out.println("Please enter a new length for the other adjacent side");
 					newLength = Double.parseDouble(br.readLine());
-					((Kite) list.get(index - 1)).setOtherSide(newLength);
+					((Kite) list.get(index)).setOtherSide(newLength);
 					System.out.println("The new length for the other adjacent side is " + newLength + " unit(s)");
 					break;
 				case 6:
-					System.out.println("The current diagonal 1 is " + ((Rhombus) list.get(index - 1)).getDiagonal1());
+					System.out.println("The current diagonal 1 is " + ((Rhombus) list.get(index)).getDiagonal1());
 					System.out.println("Please enter a new length for Diagonal 1");
 					newLength = Double.parseDouble(br.readLine());
-					((Rhombus) list.get(index - 1)).setDiagonal1(newLength);
+					((Rhombus) list.get(index)).setDiagonal1(newLength);
 					System.out.println("The new length for diagonal 1 is " + newLength + " unit(s)");
 					break;
 				case 7:
-					System.out.println("The current diagonal 2 is " + ((Rhombus) list.get(index - 1)).getDiagonal2());
+					System.out.println("The current diagonal 2 is " + ((Rhombus) list.get(index)).getDiagonal2());
 					System.out.println("Please enter a new length for Diagonal 2");
 					newLength = Double.parseDouble(br.readLine());
-					((Rhombus) list.get(index - 1)).setDiagonal2(newLength);
+					((Rhombus) list.get(index)).setDiagonal2(newLength);
 					System.out.println("The new length for diagonal 2 is " + newLength + " unit(s)");
 					break;
+				default:
+					System.out.println("Please enter proper input");
+					System.out.println("Changes have not been made to any shapes");
 				}
 				break;
 
