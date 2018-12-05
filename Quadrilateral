@@ -82,8 +82,8 @@ class Square extends Quadrilateral {
 	public boolean equals(Object o) {
 		if (o instanceof Square) {
 			Square c = (Square) o;
-			if (this.sideLength == c.sideLength)
-				return true;
+			return (this.sideLength == c.sideLength);
+
 		}
 		return false;
 
@@ -146,8 +146,8 @@ class Rectangle extends Square {
 	public boolean equals(Object o) {
 		if (o instanceof Rectangle) {
 			Rectangle c = (Rectangle) o;
-			if (getSideLength() == c.getSideLength() && this.width == c.width)
-				return true;
+			return (getSideLength() == c.getSideLength() && this.width == c.width);
+
 		}
 		return false;
 
@@ -210,8 +210,7 @@ class Parallelogram extends Rectangle {
 	public boolean equals(Object o) {
 		if (o instanceof Parallelogram) {
 			Parallelogram c = (Parallelogram) o;
-			if (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && this.height == c.height)
-				return true;
+			return (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && this.height == c.height);
 		}
 		return false;
 
@@ -274,9 +273,8 @@ class Trapezoid extends Parallelogram {
 	public boolean equals(Object o) {
 		if (o instanceof Trapezoid) {
 			Trapezoid c = (Trapezoid) o;
-			if (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && getHeight() == c.getHeight()
-					&& this.topBase == c.topBase)
-				return true;
+			return (getSideLength() == c.getSideLength() && getWidth() == c.getWidth() && getHeight() == c.getHeight()
+					&& this.topBase == c.topBase);
 		}
 		return false;
 
@@ -342,16 +340,17 @@ class Rhombus extends Square {
 	@Override
 	public String toString() {
 		return "Rhombus key= " + key + " sideLength=" + getSideLength() + " units ,diagonal1=" + diagonal1
-				+ " units ,diagonal2=" + diagonal2 + "units, Perimeter=" + findPerimeter() + " units, Area=" + findArea()
-				+ " units^2";
+				+ " units ,diagonal2=" + diagonal2 + "units, Perimeter=" + findPerimeter() + " units, Area="
+				+ findArea() + " units^2";
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Rhombus) {
 			Rhombus c = (Rhombus) o;
-			if (getSideLength() == c.getSideLength() && this.diagonal1 == c.diagonal1 && this.diagonal2 == c.diagonal2)
-				return true;
+			return (getSideLength() == c.getSideLength() && this.diagonal1 == c.diagonal1
+					&& this.diagonal2 == c.diagonal2);
+
 		}
 		return false;
 
@@ -414,12 +413,10 @@ class Kite extends Rhombus {
 	public boolean equals(Object o) {
 		if (o instanceof Kite) {
 			Kite c = (Kite) o;
-			if (getSideLength() == c.getSideLength() && getDiagonal1() == c.getDiagonal1()
-					&& getDiagonal2() == c.getDiagonal2() && this.otherSide == c.otherSide)
-				return true;
+			return (getSideLength() == c.getSideLength() && getDiagonal1() == c.getDiagonal1()
+					&& getDiagonal2() == c.getDiagonal2() && this.otherSide == c.otherSide);
 		}
 		return false;
-
 	}
 
 }// End of Kite class
