@@ -258,7 +258,7 @@ class Trapezoid extends Parallelogram {
 		return ((topBase + getWidth()) * getHeight()) / 2;
 	}
 
-	public double findPerimeter() {// This works for isoceles
+	public double findPerimeter() {
 		return 2 * getSideLength() + getWidth() + topBase;
 	}
 
@@ -406,7 +406,7 @@ class Kite extends Rhombus {
 	public String toString() {
 		return "Kite key= " + key + " sideLength=" + getSideLength() + " units ,diagonal1= " + getDiagonal1()
 				+ " units ,diagonal2=" + getDiagonal2() + " units ,other adjacent side=" + otherSide
-				+ " units Perimeter=" + findPerimeter() + " units Area=" + findArea() + "units^2";
+				+ " units Perimeter=" + findPerimeter() + " units Area=" + findArea() + " units^2";
 	}
 
 	@Override
