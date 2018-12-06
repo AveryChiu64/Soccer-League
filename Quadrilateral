@@ -48,6 +48,7 @@ class Square extends Quadrilateral {
 		key = "squ" + numSquareCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -64,10 +65,12 @@ class Square extends Quadrilateral {
 		return numSquareCount;
 	}
 
+	@Override
 	public double findArea() {
 		return sideLength * sideLength;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return sideLength * 4;
 	}
@@ -112,6 +115,7 @@ class Rectangle extends Square {
 		key = "rec" + numRectangleCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -128,10 +132,12 @@ class Rectangle extends Square {
 		return numRectangleCount;
 	}
 
+	@Override
 	public double findArea() {
 		return getSideLength() * width;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return 2 * (getSideLength() + width);
 	}
@@ -175,6 +181,7 @@ class Parallelogram extends Rectangle {
 		key = "par" + numParallelogramCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -191,10 +198,12 @@ class Parallelogram extends Rectangle {
 		return numParallelogramCount;
 	}
 
+	@Override
 	public double findArea() {
 		return (getWidth() * height) / 2;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return 2 * (getSideLength() + getWidth());
 	}
@@ -238,6 +247,7 @@ class Trapezoid extends Parallelogram {
 		key = "tra" + numTrapezoidCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -254,10 +264,12 @@ class Trapezoid extends Parallelogram {
 		return numTrapezoidCount;
 	}
 
+	@Override
 	public double findArea() {
 		return ((topBase + getWidth()) * getHeight()) / 2;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return 2 * getSideLength() + getWidth() + topBase;
 	}
@@ -305,6 +317,7 @@ class Rhombus extends Square {
 		key = "rho" + numRhombusCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -329,10 +342,12 @@ class Rhombus extends Square {
 		return numRhombusCount;
 	}
 
+	@Override
 	public double findArea() {
 		return (diagonal1 * diagonal2) / 2;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return getSideLength() * 4;
 	}
@@ -378,6 +393,7 @@ class Kite extends Rhombus {
 		key = "kit" + numKiteCount;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
@@ -394,10 +410,12 @@ class Kite extends Rhombus {
 		return numKiteCount;
 	}
 
+	@Override
 	public double findArea() {
 		return (getDiagonal1() * getDiagonal2()) / 2;
 	}
 
+	@Override
 	public double findPerimeter() {
 		return 2 * (otherSide + getSideLength());
 	}
