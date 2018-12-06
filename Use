@@ -16,10 +16,11 @@ public class Use {
 
 		// Method Calls
 		menu();
-		while (Quadrilateral.getNumQ() <= 20 && check()) {
+		while (Quadrilateral.getNumQ() < 20 && check()) {
 
 			creation(input1(), input2(), list);
 		}
+		System.out.println("You have successfully created your quadrilaterals");
 		menuForData(list);
 		System.out.println("You have ended the program");
 
@@ -272,23 +273,32 @@ public class Use {
 	static void menuForData(ArrayList<Quadrilateral> list) throws IOException {
 		int choice = 0;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("You have succesfully created your quadrilaterals");
 
 		while (choice != 4) {
 			System.out.println("=============================================================");
 			System.out.println("Please choose an option");
 			System.out.println("\t1.Show a list of all the quadrilaterals created");
 			System.out.println("\t2.Find a specific quadrilateral based off of its key");
+			System.out.println("\t or change/view the properties of a shape");
 			System.out.println("\t3.Show the number of objects created and the number of each object created");
 			System.out.println("\t4.End the program");
 			System.out.println("=============================================================");
 			choice = Integer.parseInt(br.readLine());
-			if (choice == 1)
+
+			switch (choice) {
+			case 1:
 				outputList(list);
-			else if (choice == 2)
+				break;
+			case 2:
 				outputQuad(list);
-			else if (choice == 3)
+				break;
+			case 3:
 				numberOfQuads(list);
+				break;
+			case 4:
+				System.exit(0);
+			
+			}
 
 		}
 	}// End of menu or data
@@ -339,6 +349,7 @@ public class Use {
 			} else {
 				System.out.println("Please enter proper input");
 				System.out.println("The shape does not exists");
+				menuForData(list);
 			}
 		}
 		System.out.println("=============================================================");
